@@ -1,5 +1,6 @@
-# etl-shapefile-postgis
+# VisGeo
 
-Sistema web ETL (Extract, Transform and Load) para a extração de atributos de shapefiles para tabelas em banco de dados geográfico, no caso atual, o PostGIS. Assim como o processo inverso, de recuperação de shapefiles a partir dos dados armazenados no banco. 
+O VisGeo é um sistema ETL (Extract, Transform and Load) que permite salvar os registros de shapefiles para um banco de dados geográficos. 
 
-O projeto está sendo desenvolvido em parceria com a FATEC Prof. Jessen Vidal, para atender as demandas do Projeto Integrador do respectivo semestre.
+Além disso, a ferramenta permite a recuperação de shapefiles, gerando os arquivos solicitados a partir dos registros salvos nas base de dados. O projeto está sendo desenvolvido em parceria com a FATEC Prof. Jessen Vidal.
+
