@@ -136,3 +136,11 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+#Shapefiles
+*.shp
+*.shx
+*.dbf
+*.qix
+*.prj
+*.cpg
