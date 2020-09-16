@@ -47,7 +47,7 @@ export const LoginContainer = styled.div`
     width: 1300px;
     height: 100vh;
 
-    legend {
+    .page-title {
       margin-bottom: 150px;
 
       font-size: 40px;
