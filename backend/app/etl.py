@@ -21,25 +21,19 @@ class Converter():
         self.port = port
         self.database = databaseName
         self.connector = postgresql.open(f'pq://{self.username}:{self.__password}@{self.host}:{self.port}/{self.database}')
-        self.fieldTypes = list(self.fieldTypes[field] for field in self.reader.fields)
-        self.fields = list(field[0] for field in self.reader.fields)
+        self.fieldTypes = list(self.fieldTypes[field[1]] for field in self.reader.fields)
+        self.fields = list(field[0] for field in self.reader.fields)[1:]
     
 
     def shpToDatabase(self, shapeTypeName):
         pass
 
 
-    def __insertQueryGenerator(self, tableName):
-        self.query = f'INSERT INTO {tableName} ('
-
-        for field in self.fields:
-            self.query += f' {field},'
-        self.query[:-1] += ') VALUES ('
-
-        return self.query
+    def __insertPointQueryGenerator(self, tableName, columnsList, fieldsList):
+        self.query = f'INSERT INTO {tableName} '
 
 
-    def __concatenateRecordsShapes(self):
+    def __concatenateRecordsToShapes(self):
         matrix = list()
         shapeIndex = int()
         shapes = self.reader.shapes()
