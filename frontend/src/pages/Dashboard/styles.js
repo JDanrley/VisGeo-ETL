@@ -166,6 +166,11 @@ export const DashboardContainer = styled.div`
       width: 350px;
       height: max-content;
 
+      .dragger-props-custom {
+        border: none;
+        background: transparent;
+      }
+
       .upload-dash {
         display: flex;
         flex-direction: column;

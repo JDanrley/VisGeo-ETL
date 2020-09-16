@@ -85,7 +85,7 @@ function Dashboard() {
         <div className="upload-search-container">
 
           <div className="upload-container">
-            <Dragger {...props}>
+            <Dragger className="dragger-props-custom" {...props}>
               <div className="upload-dash">
                 <UploadIcon className="upload-icon" />
 
