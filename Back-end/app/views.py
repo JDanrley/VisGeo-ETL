@@ -7,7 +7,7 @@ from app import basedir, app
 from werkzeug.utils import secure_filename
 
 #ETL module
-from etl import Converter
+#import etl
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'shapefiles')
 @app.route('/upload', methods=['GET', 'POST'])
