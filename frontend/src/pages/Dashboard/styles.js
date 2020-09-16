@@ -63,10 +63,9 @@ export const DashboardContainer = styled.div`
   padding-left: 30px;
 
   background-image: url(${Background});
-  background-size: 680px;
+  background-size: 750px;
   background-repeat: no-repeat;
-  background-position: center;
-  background-position-x: 720px;
+  background-position: right;
 
   header {
     display: flex;
