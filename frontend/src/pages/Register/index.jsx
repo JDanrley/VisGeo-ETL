@@ -15,7 +15,7 @@ function Register() {
       <RegisterContainer>
         <div className="form-container">
             
-            <legend>CRIAR UMA CONTA</legend>
+            <span className="page-title">CRIAR UMA CONTA</span>
 
             <form>
               <div className="input-container">

@@ -14,7 +14,7 @@ function Login() {
       <LoginContainer>
         <div className="form-container">
           
-            <legend>ACESSE SUA CONTA</legend>
+            <span className="page-title">ACESSE SUA CONTA</span>
 
             <form>
               <div className="input-container">
