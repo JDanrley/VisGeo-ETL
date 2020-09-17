@@ -6,8 +6,8 @@ from flask import request, redirect, url_for, render_template, json
 from werkzeug.utils import secure_filename
 
 #Custom modules
-from app import basedir, app
-from app.etl import Shapefile
+from app import app
+from app.domain.shape import Shapefile
 from app.infrastructure.ShapefileRepository import ShapefileRepository
 
 @app.route('/auth', methods=['GET', 'POST'])
