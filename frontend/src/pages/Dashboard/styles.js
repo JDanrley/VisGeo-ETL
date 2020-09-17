@@ -59,54 +59,6 @@ export const DashboardContainer = styled.div`
     }
   }
 
-  .cred-info-container {
-    display: grid;
-    grid-template-columns: repeat(5, 2fr);
-    justify-items: center;
-    align-self: center;
-
-    width: 100%;
-    height: 100px;
-
-    padding-right: 250px;
-    padding-left: 250px;
-
-    .cred-meta-info {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-
-      font-size: 20px;
-      font-weight: 600;
-      color: #B2B2B2;
-
-      .host-icon {
-        width: 22px;
-        margin-right: 5px;
-      }
-    }
-
-    .cred-input-info {
-        width: 150px;
-        height: 35px;
-
-        padding-left: 15px;
-
-        font-size: 15px;
-
-        border-radius: 50px;
-        border: 3px solid #FFFFFF;
-        background: rgba(153, 154, 154, 0.27);
-
-        transition: ease-in-out 0.2s;
-
-        &:focus-within {
-          border: 3px solid #33AC91;
-        }
-      }
-  }
-
   .upload-search-container {
     display: flex;
     flex-direction: row;

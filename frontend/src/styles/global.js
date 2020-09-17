@@ -24,4 +24,9 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .modal-dialog {
+    display: flex;
+    justify-content: center;
+  }
 `;
