@@ -23,17 +23,13 @@ def auth():
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'shapefiles')
 @app.route('/uploads', methods=['POST'])
 def upload():
-    try:
-        file = request.files['shapefiles']
-        savePath = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
-        file.save(savePath)
-        return json.dumps({"fileSaved": True})
-
-    except:
-        return json.dumps({"fileSaved": False})
+    file = request.files['shapefiles']
+    savePath = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
+    file.save(savePath)
+    return redirect(f'/fields/{file.filename}')
 
 
-@app.route('/fields/<fileName>')
+@app.route('/fields/<fileName>', methods=['POST'])
 def fields(fileName):
     shapefile = Shapefile(f'shapefiles/{fileName}')
     return shapefile.exportFields()
