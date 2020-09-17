@@ -2,19 +2,11 @@ import styled from 'styled-components';
 
 import Background from '../../assets/images/background-dashboard.png';
 
-import { FaUserAlt } from 'react-icons/fa';
-import { IoIosLock } from 'react-icons/io';
-import { RiLoginBoxFill } from 'react-icons/ri';
-import { GoDatabase } from 'react-icons/go';
+
 import { RiUploadCloud2Line } from 'react-icons/ri';
 import { BsSearch } from 'react-icons/bs';
 
-export const UserIcon = styled(FaUserAlt)`
-  margin-right: 5px;
 
-  font-size: 20px;
-  color: #B2B2B2;
-`;
 
 export const UploadIcon = styled(RiUploadCloud2Line)`
   font-size: 100px;
@@ -28,27 +20,6 @@ export const SearchIcon = styled(BsSearch)`
   color: rgba(67, 219, 178, 0.25);
 
   transition: ease-in-out 0.2s;
-`;
-
-export const DatabaseIcon = styled(GoDatabase)`
-  margin-right: 5px;
-
-  font-size: 22px;
-  color: #B2B2B2;
-`;
-
-export const PortIcon = styled(RiLoginBoxFill)`
-  margin-right: 5px;
-
-  font-size: 22px;
-  color: #B2B2B2;
-`;
-
-export const Lock = styled(IoIosLock)`
-  margin-right: 5px;
-
-  font-size: 25px;
-  color: #B2B2B2;
 `;
 
 export const DashboardContainer = styled.div`

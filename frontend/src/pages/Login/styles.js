@@ -228,6 +228,7 @@ export const LoginContainer = styled.div`
           color: #33AC91;
           transition: ease-in-out 0.2s;
         }
+      }
     }
   }
 

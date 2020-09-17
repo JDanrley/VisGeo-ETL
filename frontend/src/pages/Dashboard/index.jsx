@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Upload, message } from 'antd';
 
-import { DashboardContainer, UserIcon, Lock, PortIcon,
-  DatabaseIcon, UploadIcon, SearchIcon } from './styles';
+import ModalConnection from './ModalConnection';
+
+import { DashboardContainer, UploadIcon, SearchIcon } from './styles';
 
 import LogoHeader from '../../assets/images/Logo-white-bg.png';
-import HostIcon from '../../assets/icons/host-icon.png';
 
 const { Dragger } = Upload;
 
@@ -28,7 +28,7 @@ const props = {
 };
 
 function Dashboard() {
-
+  const [openConnection, setOpenConnection] = useState(false);
   const history = useHistory();
 
   return (
@@ -43,44 +43,10 @@ function Dashboard() {
           />
         </header>
 
-        <div className="cred-info-container">
-
-          <span className="cred-meta-info">
-            <UserIcon />
-            Username
-          </span>
-
-          <span className="cred-meta-info">
-            <Lock />
-            Senha
-          </span>
-
-          <span className="cred-meta-info">
-            <img src={HostIcon} alt="Host Icon" className="host-icon"/>
-            Host
-          </span>
-
-          <span className="cred-meta-info">
-            <PortIcon />
-            Port
-          </span>
-
-          <span className="cred-meta-info">
-            <DatabaseIcon />
-            Database
-          </span>
-
-          <input type="text" className="cred-input-info"/>
-          
-          <input type="password" className="cred-input-info"/>
-
-          <input type="text" className="cred-input-info"/>
-
-          <input type="text" className="cred-input-info"/>
-
-          <input type="text" className="cred-input-info"/>
-
-        </div>
+        <ModalConnection 
+          open={openConnection} 
+          close={setOpenConnection} 
+        />
 
         <div className="upload-search-container">
 
@@ -97,13 +63,18 @@ function Dashboard() {
           </div>
 
           <div className="upload-container">
-            <button className="upload-dash search-dash">
+            <button onClick={()=> setOpenConnection(true)} className="upload-dash search-dash">
               <SearchIcon className="upload-icon" />
 
               <span className="upload-desc search-desc">Pesquise no banco de dados</span>
             </button>
 
-            <button className="handle-button">Buscar</button>
+            <button 
+              onClick={()=> setOpenConnection(true)} 
+              className="handle-button"
+            >
+              Buscar
+            </button>
           </div>
           
         </div>
