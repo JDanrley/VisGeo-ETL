@@ -16,3 +16,6 @@ class ShapefileRepository():
             return False
 
     
+    def getTables(self):
+        tables = self.connector.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")
+        return list(table[0] for table in tables)

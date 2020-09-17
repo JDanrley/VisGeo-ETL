@@ -9,15 +9,17 @@ from werkzeug.utils import secure_filename
 from app import app
 from app.domain.shape import Shapefile
 from app.infrastructure.ShapefileRepository import ShapefileRepository
+connection = ShapefileRepository()
+credentials = dict()
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
-    connection = ShapefileRepository()
+    global connection
+    global credentials
     credentials = dict(request.json)
     if connection.credentialsAreValid(credentials):
         return json.dumps({"isConnected": True})
     return json.dumps({"isConnected": False})
-
 
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'shapefiles')
@@ -33,3 +35,15 @@ def upload():
 def fields(fileName):
     shapefile = Shapefile(f'shapefiles/{fileName}')
     return shapefile.exportFields()
+
+
+@app.route('/tables')
+def tables():
+    global connection
+    return json.dumps(connection.getTables())
+
+
+@app.route('/save', methods=['GET', 'POST'])
+def save():
+    #dePara = request.json
+    return 
