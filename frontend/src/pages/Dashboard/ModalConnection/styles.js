@@ -6,6 +6,14 @@ import { FaUserAlt } from 'react-icons/fa';
 import { IoIosLock } from 'react-icons/io';
 import { RiLoginBoxFill } from 'react-icons/ri';
 import { GoDatabase } from 'react-icons/go';
+import { WiCloudyWindy } from 'react-icons/wi';
+
+export const HostIcon = styled(WiCloudyWindy)`
+  font-size: 100px;
+  color: white;
+
+  transition: ease-in-out 0.2s;
+`;
 
 export const Modal = styled(ModalBoots)`
 
@@ -88,6 +96,13 @@ export const Modal = styled(ModalBoots)`
       font-size: 20px;
       font-weight: 600;
       color: #FFFFFF;
+
+      border: 2px solid red;
+
+      .white-icon {
+        font-size: 30px;
+        color: white;
+      }
 
       .host-icon {
         width: 22px;

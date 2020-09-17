@@ -2,9 +2,7 @@ import React from 'react';
 
 import api from '../../../services/api';
 
-import HostIcon from '../../../assets/icons/host-icon.png';
-
-import { UserIcon, Lock, PortIcon, DatabaseIcon, Modal } from './styles';
+import { UserIcon, Lock, PortIcon, DatabaseIcon, Modal, HostIcon } from './styles';
 
 const ModalConnection = ({open, close}) => {
 
@@ -25,12 +23,12 @@ const ModalConnection = ({open, close}) => {
       <div className="cred-info-container">
         <section>
           <span className="cred-meta-info">
-            <UserIcon />
+            <UserIcon className="white-icon" />
             Username
           </span>
 
           <span className="cred-meta-info">
-            <Lock />
+            <Lock className="white-icon" />
             Senha
           </span>
 
@@ -41,19 +39,19 @@ const ModalConnection = ({open, close}) => {
 
         <section>
           <span className="cred-meta-info">
-            <img src={HostIcon} alt="Host Icon" className="host-icon"/>
+            <HostIcon className="white-icon"/>
             Host
           </span>
     
 
           <span className="cred-meta-info">
-            <PortIcon />
+            <PortIcon className="white-icon" />
             Port
           </span>
 
 
           <span className="cred-meta-info">
-            <DatabaseIcon />
+            <DatabaseIcon className="white-icon" />
             Database
           </span>
           
