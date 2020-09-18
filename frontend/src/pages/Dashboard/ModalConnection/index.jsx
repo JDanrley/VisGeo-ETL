@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import api from '../../../services/api';
 
 import { UserIcon, Lock, PortIcon, DatabaseIcon, Modal, HostIcon } from './styles';
 
 const ModalConnection = ({open, close}) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [host, setHost] = useState('');
+  const [port, setPort] = useState('');
+  const [database, setDatabase] = useState('');
 
   const handleConnect = () => {
-    api.get('/uploads').then(response => console.log(response));
+    api.post('/auth', {
+      username,
+      password,
+      host,
+      port,
+      database
+    }).then(response => console.log(response));
   }
 
   const handleClose = () => {
@@ -32,9 +43,9 @@ const ModalConnection = ({open, close}) => {
             Senha
           </span>
 
-          <input type="text" className="cred-input-info"/>
+          <input onChange={e => setUsername(e.target.value)} type="text" className="cred-input-info"/>
 
-          <input type="password" className="cred-input-info"/>
+          <input onChange={e => setPassword(e.target.value)} type="password" className="cred-input-info"/>
         </section>
 
         <section>
@@ -55,11 +66,11 @@ const ModalConnection = ({open, close}) => {
             Database
           </span>
           
-          <input type="text" className="cred-input-info"/>
+          <input onChange={e => setHost(e.target.value)} type="text" className="cred-input-info"/>
 
-          <input type="text" className="cred-input-info"/>
+          <input onChange={e => setPort(e.target.value)} type="text" className="cred-input-info"/>
 
-          <input type="text" className="cred-input-info"/>
+          <input onChange={e => setDatabase(e.target.value)} type="text" className="cred-input-info"/>
         </section>
       </div>
 
