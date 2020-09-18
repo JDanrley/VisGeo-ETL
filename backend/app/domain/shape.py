@@ -38,6 +38,19 @@ class Shapefile():
     def exportFields(self):
         return json.dumps(self.fields)
 
+    
+    def namesToIndex(self, dePara):
+        pass
+
+
+    def indexFields(self):
+        index = dict()
+        indexCount = int()
+        for field in self.fields:
+            index[field] = indexCount
+            indexCount += 1
+        return index
+
         
 
 

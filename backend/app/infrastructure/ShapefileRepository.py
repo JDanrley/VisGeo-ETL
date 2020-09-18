@@ -19,9 +19,14 @@ class ShapefileRepository():
     
     def getTables(self):
         tables = self.connector.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")
-        standardTables = ["geography_columns", "geometry_columns", "spatial_ref_sys"]
-        self.tables = list(table[0] for table in tables if table[0] not in standardTables)
+        defaultTables = ["geography_columns", "geometry_columns", "spatial_ref_sys"]
+        self.tables = list(table[0] for table in tables if table[0] not in defaultTables)
         return self.tables
+
+    
+    def getColumnsNames(self, tableName):
+        columns = self.connector(f"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{tableName}'")
+        return columns
     
 
     def savePointShapefile(self):
@@ -32,6 +37,9 @@ class ShapefileRepository():
         pass
 
 
+    def close(self):
+        self.connector = None
+        self.isConnected = False
+        self.tables = None
 
-
-
+    

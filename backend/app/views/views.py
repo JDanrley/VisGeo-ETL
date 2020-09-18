@@ -43,8 +43,6 @@ def tables():
     return json.dumps(connection.getTables())
 
 
-@app.route('/save', methods=['GET', 'POST'])
-def save():
-    connection.fieldsToColumns = dict(request.json)
-    
-    return 
+@app.route('/columns/<tableName>', methods=['GET'])
+def columns(tableName):
+    return json.dumps(connection.getColumnsNames(tableName))
