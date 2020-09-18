@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { DashboardContainer } from './styles';
 
 import Acess from './components/Acess';
+import Fields from './components/Fields';
 
 import LogoHeader from '../../assets/images/Logo-white-bg.png';
 
 function Dashboard() {
   const history = useHistory();
+  const [change, setChange] = useState(false)
 
   return (
     <>
@@ -20,9 +22,15 @@ function Dashboard() {
             className="logo-header"
             onClick={() => history.push('/')}
           />
-        </header>
 
-        <Acess />
+          <button onClick={()=> setChange(!change)}>DEBUG CHANGE COMPONENT</button>
+        </header>
+        
+        {
+          change 
+            ? <Fields />
+            : <Acess />
+        }
           
       </DashboardContainer>
     </>
