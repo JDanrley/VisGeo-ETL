@@ -31,7 +31,7 @@ def upload():
     return redirect(f'/fields/{file.filename}')
 
 
-@app.route('/fields/<fileName>', methods=['POST'])
+@app.route('/fields/<fileName>', methods=['GET','POST'])
 def fields(fileName):
     shapefile = Shapefile(f'shapefiles/{fileName}')
     return shapefile.exportFields()
@@ -45,5 +45,6 @@ def tables():
 
 @app.route('/save', methods=['GET', 'POST'])
 def save():
-    #dePara = request.json
+    connection.fieldsToColumns = dict(request.json)
+    
     return 

@@ -4,6 +4,7 @@ class ShapefileRepository():
 
     def __init__(self):
         self.isConnected = False
+        self.fieldsToColumns = None
         pass
 
 
@@ -18,4 +19,19 @@ class ShapefileRepository():
     
     def getTables(self):
         tables = self.connector.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")
-        return list(table[0] for table in tables)
+        standardTables = ["geography_columns", "geometry_columns", "spatial_ref_sys"]
+        self.tables = list(table[0] for table in tables if table[0] not in standardTables)
+        return self.tables
+    
+
+    def savePointShapefile(self):
+        pass
+
+
+    def queryGeneratorPoint(self, tableName, columnsList):
+        pass
+
+
+
+
+

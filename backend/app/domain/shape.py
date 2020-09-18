@@ -17,7 +17,7 @@ class Shapefile():
         self.shpType = self.reader.shapeTypeName
         self.fieldTypes = list(self.fieldTypes[field[1]] for field in self.reader.fields)
         self.fields = list(field[0] for field in self.reader.fields)[1:]
-        self.matrixBase = self.__concatenateRecordsToShapes()
+        self.data = self.__concatenateRecordsToShapes()
 
 
     def shpToDatabase(self, shapeTypeName):
