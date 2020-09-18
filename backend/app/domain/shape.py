@@ -30,7 +30,7 @@ class Shapefile():
         shapes = self.reader.shapes()
         for recordList in self.reader.records():
             matrix.append(recordList)
-            matrix[shapeIndex].append(shapes[shapeIndex])
+            matrix[shapeIndex].append(shapes[shapeIndex].points)
             shapeIndex += 1
         return matrix
 

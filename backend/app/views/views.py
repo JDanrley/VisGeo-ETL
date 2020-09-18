@@ -38,7 +38,7 @@ def upload():
     
 
 @app.route('/getFields/', methods=['GET'])
-def fields(fileName):
+def fields():
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
     return shapefile.exportFields()
 

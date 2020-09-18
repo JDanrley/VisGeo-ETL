@@ -30,12 +30,30 @@ class ShapefileRepository():
         return columns[:-1]
     
 
-    def savePointShapefile(self):
-        pass
+    def populateTableMultipoint(self, data, tableName, columnsList):
+        for row in data:
+            query = self.queryGeneratorMultipoint(tableName, columnsList, row[:-1], row[-1])
+            self.connector.execute(query)
 
+    
+    def queryGeneratorMultipoint(self, tableName, columnsList, inputValuesList, points, ersi = 4674):
+        columnsArgs = str()
+        valuesArgs = str()
+        
+        for arg in columnsList:
+            columnsArgs += str(arg) + ', '
+        columnsArgs = columnsArgs[:-2]
 
-    def queryGeneratorPoint(self, tableName, columnsList):
-        pass
+        for arg in inputValuesList:
+            if type(arg) == str:
+                valuesArgs += f"'{arg}'" + ', '
+            else:
+                valuesArgs += str(arg) + ', '
+        valuesArgs = valuesArgs[:-2]
+            
+        query = f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({valuesArgs}, ST_GeomFromText('MULTIPOINT({points[0][0]} {points[0][1]})', {ersi}))"
+        return query
+
 
 
     def close(self):
