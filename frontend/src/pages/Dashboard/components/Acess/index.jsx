@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import api from '../../../../services/api';
+
 import { Upload, message } from 'antd';
 
 import ModalConnection from '../../ModalConnection';
@@ -28,6 +30,11 @@ const Acess = () => {
     },
   };
 
+  async function handleUpload() {
+    const response = await api.get("/getFields");
+    console.log(response)
+  }
+
   return (
     <Container>
       <ModalConnection 
@@ -46,7 +53,7 @@ const Acess = () => {
             </div>
           </Dragger>
 
-          <button className="handle-button">Upload</button>
+          <button onClick={handleUpload} className="handle-button">Upload</button>
         </div>
 
         <div className="upload-container">
