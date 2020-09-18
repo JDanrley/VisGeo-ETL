@@ -2,57 +2,65 @@ import React from 'react';
 
 import api from '../../../services/api';
 
-import HostIcon from '../../../assets/icons/host-icon.png';
+import { UserIcon, Lock, PortIcon, DatabaseIcon, Modal, HostIcon } from './styles';
 
-import { UserIcon, Lock, PortIcon, DatabaseIcon, Modal } from './styles';
-
-const ModalConnection = ({open}) => {
+const ModalConnection = ({open, close}) => {
 
   const handleConnect = () => {
-    api.post('/auth');
+    api.get('/uploads').then(response => console.log(response));
+  }
+
+  const handleClose = () => {
+    close(false);
   }
 
   return (
-    <Modal show={open}>
+    <Modal show={open} onHide={handleClose}>
       <Modal.Header>
         <h1>ACESSE O BANCO DE DADOS DESEJADO</h1>
       </Modal.Header>
 
       <div className="cred-info-container">
-        <span className="cred-meta-info">
-          <UserIcon />
-          Username
-        </span>
+        <section>
+          <span className="cred-meta-info">
+            <UserIcon className="white-icon" />
+            Username
+          </span>
 
-        <span className="cred-meta-info">
-          <Lock />
-          Senha
-        </span>
+          <span className="cred-meta-info">
+            <Lock className="white-icon" />
+            Senha
+          </span>
 
-        <span className="cred-meta-info">
-          <img src={HostIcon} alt="Host Icon" className="host-icon"/>
-          Host
-        </span>
+          <input type="text" className="cred-input-info"/>
 
-        <span className="cred-meta-info">
-          <PortIcon />
-          Port
-        </span>
+          <input type="password" className="cred-input-info"/>
+        </section>
 
-        <span className="cred-meta-info">
-          <DatabaseIcon />
-          Database
-        </span>
+        <section>
+          <span className="cred-meta-info">
+            <HostIcon className="white-icon"/>
+            Host
+          </span>
+    
 
-        <input type="text" className="cred-input-info"/>
+          <span className="cred-meta-info">
+            <PortIcon className="white-icon" />
+            Port
+          </span>
 
-        <input type="password" className="cred-input-info"/>
 
-        <input type="text" className="cred-input-info"/>
+          <span className="cred-meta-info">
+            <DatabaseIcon className="white-icon" />
+            Database
+          </span>
+          
+          <input type="text" className="cred-input-info"/>
 
-        <input type="text" className="cred-input-info"/>
+          <input type="text" className="cred-input-info"/>
 
-        <input type="text" className="cred-input-info"/>
+          <input type="text" className="cred-input-info"/>
+        </section>
       </div>
 
       <Modal.Footer>

@@ -11,9 +11,10 @@ import LogoHeader from '../../assets/images/Logo-white-bg.png';
 const { Dragger } = Upload;
 
 const props = {
-  name: 'file',
+  name: 'shapefiles',
   multiple: true,
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  action: 'http://localhost:5000/uploads',
+
   onChange(info) {
     const { status } = info.file;
     if (status !== 'uploading') {
