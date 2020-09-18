@@ -2,15 +2,19 @@
 import os
 
 #Flask modules
-from flask import request, redirect, url_for, render_template, json
+from flask import request, redirect, url_for, render_template, json, Response
 from werkzeug.utils import secure_filename
 
 #Custom modules
 from app import app
 from app.domain.shape import Shapefile
 from app.infrastructure.ShapefileRepository import ShapefileRepository
+
+#Global variables
 connection = ShapefileRepository()
 credentials = dict()
+currentFileName = None
+
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
@@ -28,12 +32,14 @@ def upload():
     file = request.files['shapefiles']
     savePath = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
     file.save(savePath)
-    return redirect(f'/fields/{file.filename}')
+    global currentFileName
+    currentFileName = file.filename
+    return Response(status=201)
+    
 
-
-@app.route('/fields/<fileName>', methods=['GET','POST'])
+@app.route('/getFields/', methods=['GET'])
 def fields(fileName):
-    shapefile = Shapefile(f'shapefiles/{fileName}')
+    shapefile = Shapefile(f'shapefiles/{currentFileName}')
     return shapefile.exportFields()
 
 

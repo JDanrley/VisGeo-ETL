@@ -25,8 +25,9 @@ class ShapefileRepository():
 
     
     def getColumnsNames(self, tableName):
-        columns = self.connector(f"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{tableName}'")
-        return columns
+        columns = self.connector.query(f"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{tableName}'")
+        columns = [column[0] for column in columns]
+        return columns[:-1]
     
 
     def savePointShapefile(self):
