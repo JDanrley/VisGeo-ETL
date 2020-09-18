@@ -75,7 +75,12 @@ const ModalConnection = ({open, close}) => {
       </div>
 
       <Modal.Footer>
-        <button onClick={handleConnect}>Conectar</button>
+        <button 
+          onClick={handleConnect}
+          className="handle-button"
+        >
+          Conectar
+        </button>
       </Modal.Footer>
     </Modal>
   )
