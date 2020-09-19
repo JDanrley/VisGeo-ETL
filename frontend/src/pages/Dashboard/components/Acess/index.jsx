@@ -34,7 +34,8 @@ const Acess = ({setFields, setTables, changeScreen}) => {
     try {
       const response = await api.get("/getFieldsAndTables");
       setFields(response?.data?.fields);
-      setTables(response?.data?.tables)
+      setTables(response?.data?.tables);
+      console.log(response.data)
       changeScreen(true);
     } catch (error) {
       console.log(error);

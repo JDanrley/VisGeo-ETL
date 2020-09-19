@@ -25,7 +25,6 @@ function Dashboard() {
             onClick={() => history.push('/')}
           />
 
-          <button onClick={()=> setChange(!change)}>DEBUG CHANGE COMPONENT</button>
         </header>
         
         {

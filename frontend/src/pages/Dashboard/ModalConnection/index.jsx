@@ -52,7 +52,6 @@ const ModalConnection = ({open, close}) => {
     <Modal show={!open} >
       <Modal.Header>
         <h1>ACESSE O BANCO DE DADOS DESEJADO</h1>
-        <CloseIcon onClick={handleClose} />
       </Modal.Header>
 
       {error && (
