@@ -30,9 +30,20 @@ class ShapefileRepository():
         return columns[:-1]
     
 
-    def populateTableMultipoint(self, data, tableName, columnsList):
+    def populateTableMultipoint(self, data, shapefileFields, tableName, selectedFields, columnsList):
+        #selectedFields = ['fid', 'idponto', 'deponto'] -> example
         for row in data:
-            query = self.queryGeneratorMultipoint(tableName, columnsList, row[:-1], row[-1])
+            selectedFieldsIndex = list()
+
+            for field in selectedFields:
+                selectedFieldsIndex.append(shapefileFields.index(field))   #getting the index for each selected field
+            
+            selectedRecords = list()
+            
+            for selectedIndex in selectedFieldsIndex:               #filtering the values according to the index
+                selectedRecords.append(row[:-1][selectedIndex])
+
+            query = self.queryGeneratorMultipoint(tableName, columnsList, selectedRecords, row[-1])
             self.connector.execute(query)
 
     
@@ -53,6 +64,7 @@ class ShapefileRepository():
             
         query = f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({valuesArgs}, ST_GeomFromText('MULTIPOINT({points[0][0]} {points[0][1]})', {ersi}))"
         return query
+
 
 
 
