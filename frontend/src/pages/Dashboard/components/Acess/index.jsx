@@ -35,11 +35,16 @@ const Acess = ({setFields, setTables, changeScreen}) => {
       const response = await api.get("/getFieldsAndTables");
       setFields(response?.data?.fields);
       setTables(response?.data?.tables);
-      console.log(response.data)
       changeScreen(true);
     } catch (error) {
       console.log(error);
-    }    
+    }
+    
+    /* CODIGO PARA DEBUG */
+    
+    if (localStorage.getItem('MODE') === 'debug') changeScreen(true);
+    
+    /* CODIGO PARA DEBUG */
   }
 
   return (

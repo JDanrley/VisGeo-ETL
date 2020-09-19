@@ -6,6 +6,25 @@ export const Modal = styled(ModalBoots)`
   width: 100%;
   height: 100vh;
 
+  .ant-alert-with-description {
+    margin-bottom: 40px;
+    border-radius: 15px;
+    width: 500px;
+    align-self: center;
+
+    .ant-alert-close-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 14px;
+      cursor: pointer;
+
+      background: none;
+      display: flex;
+      align-items: center;
+    }
+  }
+
   .modal-content {
     width: 800px;
     height: 600px;
@@ -67,8 +86,9 @@ export const Modal = styled(ModalBoots)`
   }
 
   button {
-    position: absolute;
-    bottom: 10px;
+    position: fixed;
+    bottom: 200px;
+
     padding: 10px 40px;
     border: none;
     border-radius: 8px;

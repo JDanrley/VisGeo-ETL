@@ -5,8 +5,7 @@ import { Alert } from 'antd';
 import api from '../../../services/api';
 
 import { UserIcon, Lock, PortIcon, DatabaseIcon, 
-    Modal, HostIcon, CloseIcon 
-  } from './styles';
+    Modal, HostIcon } from './styles';
 
 const ModalConnection = ({open, close}) => {
   const [error, setError] = useState(false);
@@ -27,25 +26,33 @@ const ModalConnection = ({open, close}) => {
       database
     };
 
-    if (username, password, host, port, database){
-      try {
-        const response = await api.post('/auth', data);
-        const { isConnected } = response?.data;
-        console.log(isConnected);
-        if(isConnected) close(true);
-      } catch (error) {
+    /* CODIGO PARA DEBUG */
+    if (username === 'debug-develop') {
+      localStorage.setItem('MODE', 'debug');
+      close(true);
+      return;
+    } else {
+      localStorage.setItem('MODE', 'production');
+    }
+    /* CODIGO PARA DEBUG */
+
+
+    if ( username, password, host, port, database ) {
+      const response = await api.post('/auth', data);
+      const { isConnected } = response.data;
+      
+      if(isConnected) {
+        close(true);
+      } else {
         setError(true);
-        setErrorMessage("Ocorreu um erro ao tentar se conectar com o servidor");
+        setErrorMessage("Credenciais não estão corretas");
       }
-      return
+
+      return;
     }
 
     setError(true);
     setErrorMessage("Campos não podem estar nulos");
-  }
-
-  const handleClose = () => {
-    close(true);
   }
 
   return (
