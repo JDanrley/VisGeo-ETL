@@ -32,6 +32,14 @@ class ShapefileRepository():
         return columns[:-1]
     
 
+    def populate(self, geoType, data, shapefileFields, tableName, selectedFields, columnsList):
+        if geoType.upper() == 'MULTIPOINT':
+            self.populateTableMultipoint(data, shapefileFields, tableName, selectedFields, columnsList)
+        elif geoType.upper() == 'POLYGON':
+            self.populateTablePolygon(data, shapefileFields, tableName, selectedFields, columnsList)
+        return
+
+
     def populateTableMultipoint(self, data, shapefileFields, tableName, selectedFields, columnsList):
         #selectedFields = ['fid', 'idponto', 'deponto'] -> example
         for row in data:
@@ -44,7 +52,7 @@ class ShapefileRepository():
             
             for selectedIndex in selectedFieldsIndex:               #filtering the values according to the index
                 selectedRecords.append(row[:-1][selectedIndex])
-
+            
             query = self.queryGeneratorMultipoint(tableName, columnsList, selectedRecords, row[-1])
             self.connector.execute(query)
 
@@ -94,7 +102,7 @@ class ShapefileRepository():
     
     def populateTablePolygon(self, data, shapefileFields, tableName, selectedFields, columnsList):
         #selectedFields = ['fid', 'idponto', 'deponto'] -> example
-        
+        queryCount = 1
         for row in data:
             selectedFieldsIndex = list()
 
@@ -108,9 +116,9 @@ class ShapefileRepository():
             
             
             query = self.queryGeneratorPolygon(tableName, columnsList, selectedRecords, row[-1])
-            
+            print('Inserindo linha' + queryCount)
             self.connector.execute(query)
-            
+            queryCount += 1
 
     def close(self):
         self.connector = None
