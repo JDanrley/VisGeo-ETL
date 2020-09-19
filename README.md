@@ -60,11 +60,10 @@ O Projeto consiste no desenvolvimento de um sistema web ETL¹ no qual dados geor
 ![VisGeo - Techs](https://user-images.githubusercontent.com/56441371/93688825-3c803280-fa9f-11ea-9408-bd07d27aad71.png)
 
 - De acordo com os requisitos não funcionais levantados e alinhamento com nosso cliente, optamos por utilizar Java no CRUD de usuários.
-- A API que trata do processo ETL foi desenvolvida em Python, com auxílio do Framework Flask, e das bibliotecas PyShp e postgresql.
-- O Front-end foi desenvolvido com React usando as bibliotecas Ant Design, Axios, Bootstrap, React-Bootstrap, React Icons, StyledComponents
+- A  API que trata do processo ETL foi desenvolvida em Python, com auxílio do Framework Flask, e das bibliotecas PyShp e postgresql.
+- O front-end foi desenvolvido com React usando as bibliotecas Ant Design, Axios, Bootstrap, React-Bootstrap, React Icons e StyledComponents.
 - Os arquivos shapefiles são carregados em Banco de Dados Postgres, utilizando a extensão para arquivos geográficos, PostGis.
 
-### Cards das Sprints
 
 ### Entregas
 
@@ -80,15 +79,15 @@ O Projeto consiste no desenvolvimento de um sistema web ETL¹ no qual dados geor
 
 [Branch 6](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-6) 23/11/2020 a 29/11/2020
 
-### Requisitos necessários para o funcionamento do softeare
+### Requisitos necessários para o funcionamento do software
 
 - **Python 3** ou superior;
 - Gerenciador de pacotes **Pip3**;
 - **NODEJS 12.18.0v** ou superior;
 - Gerenciador de pacotes **npm** ou **yarn**;
 - Framework **Flask**;
-- Bibliotecas Back-end **PyShp, postgresql, cors**.
-- Bibliotecas Back-end **ReactJS**, **Ant Design, Axios, Bootstrap, React-Bootstrap, React Icons, StyledComponents**.
+- Bibliotecas back-end **PyShp, postgresql, cors**.
+- Bibliotecas front-end **ReactJS, Ant Design, Axios, Bootstrap, React-Bootstrap, React Icons e StyledComponents**.
 
 **Instalação em ambientes Linux**
 
@@ -128,12 +127,12 @@ $ pip3 install virtualenv
 $ virtualenv -p python3 venv
 ```
 
--Para iniciar a Virtualenv
+- Para iniciar a Virtualenv:
 ```
 $ source venv/bin/activate
 ```
 
-- Após iniciá-lo, instale as dependências do backend, que incluem o framework e as bibliotecas necessárias para funcionamento da API.
+- Após iniciá-lo, instale as dependências do back-end, que incluem o framework e as bibliotecas necessárias para funcionamento da API.
 
 ```
 $ cd backend
@@ -141,7 +140,7 @@ $ cd backend
 $ venv/bin/pip3 install -r requirements.txt
 ```
 
-- Por último instale as dependências do frontend.
+- Por último instale as dependências do front-end, que também incluem todas as bibliotecas necessárias.
 
 ```
 $ cd frontend
@@ -152,13 +151,13 @@ $ npm install ou yarn
 - Para iniciar os servidores, execute:
 
 
-- Frontend:
+- Front-end:
 
 ```
 $ yarn start
 ```
 
-- Backend:
+- Back-end:
 
 ```
 $ python3 run.py
@@ -167,12 +166,14 @@ $ python3 run.py
 **Instalação em ambientes Windows**
 
 - Basta instalar o **Python3**, pois o **pip3** já virá instalado por padrão juntamente com o **Python**.
-- Para isso, basta executar o comando abaixo:
+- Para isso, acesse o site abaixo e baixe a versão para seu Sistema Operacional:
 
 https://www.python.org/downloads/
 
+
 **Nodejs**
 
+- Acesse o site abaixo e baixe a versão para seu Sistema Operacional:
 
 https://nodejs.org/en/download/
 
@@ -191,13 +192,13 @@ $ pip3 install virtualenv
 $ virtualenv -p python3 venv
 ```
 
--Para iniciar a Virtualenv
+- Para iniciar a Virtualenv:
 ```
 $ source venv/bin/activate
 ```
-```
 
-- Após iniciá-lo, instale as dependências do backend, que incluem o framework e as bibliotecas necessárias para funcionamento da API.
+
+- Após iniciá-lo, instale as dependências do back-end, que incluem o framework e as bibliotecas necessárias para funcionamento da API.
 
 ```
 $ cd backend
@@ -205,7 +206,7 @@ $ cd backend
 $ venv/bin/pip3 install -r requirements.txt
 ```
 
-- Por último instale as dependências do frontend.
+- Por último instale as dependências do front-end, que também incluem todas as bibliotecas necessárias.
 
 ```
 $ cd frontend
@@ -215,13 +216,13 @@ $ npm install ou yarn
 
 - Para iniciar os servidores, execute:
 
-- Frontend:
+- Front-end:
 
 ```
 $ yarn start
 ```
 
-- Backend:
+- Back-end:
 
 ```
 $ python3 run.py
@@ -231,12 +232,13 @@ $ python3 run.py
 
 ¹ ETL - Vem do inglês Extract, Transform and Load (Extrair, transformar e carregar), consiste em um processo de direção dos dados até o armazenamento. A ele corresponde as ações de extração, tratamento e inserção na base de dados.
 
-² Shapefiles – É um formato de armazenamento de dados vetoriais, formado por múltiplos . Pode armazenar geometria do tipo ponto, ou polígono ou linha. No shapefile três arquivos são obrigatórios e devem estar na mesma pasta, ter o mesmo nome e diferente entre si por conta de sua extensão, são elas .dbf, .shp e .shx, os arquivos com extensão .cpg, .prj são facultativos.
+² Shapefiles – É um formato de armazenamento de dados vetoriais, formado por aqrquivos com múltiplas extensões. Pode armazenar geometria do tipo ponto, polígono ou linha. No shapefile três arquivos são obrigatórios e devem estar na mesma pasta, ter o mesmo nome; estes arquivos são diferentes entre si por conta de sua extensão, sendo elas .dbf, .shp e .shx. Já os arquivos com extensão .cpg e .prj são facultativos.
 
 - .shp – geometria da operação
 - .shx – índice da geometria do recurso
 - .dbf – informações de atributo
 - .prj - sistema de coordenadas e informações de projeção
+- .cpg - descreve um conjunto de caracteres para exibir texto
 
 ³ Banco de dados relacional
-É um tipo de banco de dados que armazena e fornece acesso a pontos de dados relacionados entre si, de modo intuitivo e direto
+É um tipo de banco de dados que armazena e fornece acesso a pontos de dados relacionados entre si, de modo intuitivo e direto.
