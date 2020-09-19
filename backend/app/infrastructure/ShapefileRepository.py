@@ -1,5 +1,6 @@
 import postgresql
 
+
 class ShapefileRepository():
 
     def __init__(self):
@@ -12,6 +13,7 @@ class ShapefileRepository():
         try:
             self.connector = postgresql.open(f'pq://{credentials["username"]}:{credentials["password"]}@{credentials["host"]}:{credentials["port"]}/{credentials["database"]}')
             self.isConnected = True
+            self.credentials = credentials
             return True
         except:
             return False
@@ -61,12 +63,54 @@ class ShapefileRepository():
             else:
                 valuesArgs += str(arg) + ', '
         valuesArgs = valuesArgs[:-2]
-            
+
         query = f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({valuesArgs}, ST_GeomFromText('MULTIPOINT({points[0][0]} {points[0][1]})', {ersi}))"
         return query
 
 
+    def queryGeneratorPolygon(self, tableName, columnsList, inputValuesList, geom, ersi = 4674):
+        columnsArgs = str()
+        valuesArgs = str()
+        geomArgs = str()
+        
+        for arg in columnsList:
+            columnsArgs += str(arg) + ', '
+        columnsArgs = columnsArgs[:-2]
 
+        for arg in inputValuesList:
+            if type(arg) == str:
+                valuesArgs += f"'{arg}'" + ', '
+            else:
+                valuesArgs += str(arg) + ', '
+        valuesArgs = valuesArgs[:-2]
+
+        for pair in geom:
+            geomArgs += str(pair[0]) + ' ' + str(pair[1]) + ', '
+        geomArgs = geomArgs[:-2]
+        
+        query = f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({valuesArgs}, ST_GeomFromText('POLYGON(({geomArgs}))', {ersi}))"
+        return query
+    
+    
+    def populateTablePolygon(self, data, shapefileFields, tableName, selectedFields, columnsList):
+        #selectedFields = ['fid', 'idponto', 'deponto'] -> example
+        
+        for row in data:
+            selectedFieldsIndex = list()
+
+            for field in selectedFields:
+                selectedFieldsIndex.append(shapefileFields.index(field))   #getting the index for each selected field
+            
+            selectedRecords = list()
+            
+            for selectedIndex in selectedFieldsIndex:               #filtering the values according to the index
+                selectedRecords.append(row[:-1][selectedIndex])
+            
+            
+            query = self.queryGeneratorPolygon(tableName, columnsList, selectedRecords, row[-1])
+            
+            self.connector.execute(query)
+            
 
     def close(self):
         self.connector = None
