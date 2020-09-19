@@ -40,6 +40,30 @@ export const Container = styled.div`
       border: 4px solid #33AC91;
     }
 
+    .ant-dropdown-trigger {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      border: 2px solid red;
+      font-size: 25px;
+      color: #43DBB2;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: none;
+        color: #33AC91;
+      }
+
+      .down-arrow-menu {
+        font-size: 20px;
+        margin-left: 5px;
+      }
+    }
+
+    
+
     span.title {
       font-family: Quicksand;
       font-style: normal;
