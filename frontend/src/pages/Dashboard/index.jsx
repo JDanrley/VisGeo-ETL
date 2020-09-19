@@ -10,6 +10,7 @@ import LogoHeader from '../../assets/images/Logo-white-bg.png';
 
 function Dashboard() {
   const history = useHistory();
+  const [fields, setFields] = useState([]);
   const [change, setChange] = useState(false)
 
   return (
@@ -28,8 +29,8 @@ function Dashboard() {
         
         {
           change 
-            ? <Fields />
-            : <Acess />
+            ? <Fields fields={fields} />
+            : <Acess setFields={setFields} changeScreen={setChange} />
         }
           
       </DashboardContainer>

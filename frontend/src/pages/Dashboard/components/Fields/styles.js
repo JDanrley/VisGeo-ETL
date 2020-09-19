@@ -67,14 +67,11 @@ export const Container = styled.div`
   .fields-search-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
 
     width: 100%;
     height: 100%;
-
-    padding-right: 250px;
-    padding-left: 250px;
 
     &:hover {
       border: none;
