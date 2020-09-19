@@ -11,7 +11,8 @@ import LogoHeader from '../../assets/images/Logo-white-bg.png';
 function Dashboard() {
   const history = useHistory();
   const [fields, setFields] = useState([]);
-  const [change, setChange] = useState(false)
+  const [tables, setTables] = useState([]);
+  const [change, setChange] = useState(false);
 
   return (
     <>
@@ -29,8 +30,8 @@ function Dashboard() {
         
         {
           change 
-            ? <Fields fields={fields} />
-            : <Acess setFields={setFields} changeScreen={setChange} />
+            ? <Fields fields={fields} tables={tables} />
+            : <Acess setFields={setFields} setTables={setTables} changeScreen={setChange} />
         }
           
       </DashboardContainer>

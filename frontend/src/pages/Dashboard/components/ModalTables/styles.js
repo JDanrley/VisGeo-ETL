@@ -15,6 +15,11 @@ export const Modal = styled(ModalBoots)`
     max-width: 100%;
   }
 
+  .content {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   ul {
     list-style-type: none;
   }
