@@ -35,8 +35,8 @@ class Shapefile():
         return matrix
 
 
-    def exportFields(self):
-        return json.dumps(self.fields)
+    def getFields(self):
+        return self.fields
 
     
     def namesToIndex(self, dePara):
