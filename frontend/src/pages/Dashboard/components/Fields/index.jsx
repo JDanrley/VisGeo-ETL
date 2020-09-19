@@ -32,7 +32,7 @@ const Fields = ({fields, tables}) => {
   return (  
     <Container>
       
-      <ModalTables show={openModal} setShow={setOpenModal} tables={tables} />
+      <ModalTables show={openModal} setShow={setOpenModal} fields={fields} tableName={'ft_ponto_drenagem'} />
 
       <div className="fields-search-container">
         <section>
