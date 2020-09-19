@@ -22,11 +22,11 @@ const ModalConnection = ({open, close}) => {
   }
 
   const handleClose = () => {
-    close(false);
+    close(true);
   }
 
   return (
-    <Modal show={open} onHide={handleClose}>
+    <Modal show={!open} >
       <Modal.Header>
         <h1>ACESSE O BANCO DE DADOS DESEJADO</h1>
       </Modal.Header>
@@ -76,7 +76,7 @@ const ModalConnection = ({open, close}) => {
 
       <Modal.Footer>
         <button 
-          onClick={handleConnect}
+          onClick={handleClose}
           className="handle-button"
         >
           Conectar
