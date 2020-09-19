@@ -97,8 +97,6 @@ export const Modal = styled(ModalBoots)`
       font-weight: 600;
       color: #FFFFFF;
 
-      border: 2px solid red;
-
       .white-icon {
         font-size: 30px;
         color: white;
@@ -114,6 +112,8 @@ export const Modal = styled(ModalBoots)`
       width: 90%;
       height: 45px;
 
+      margin-top: 5px;
+      margin-left: 15px;
       padding-left: 15px;
 
       font-size: 15px;
@@ -130,21 +130,25 @@ export const Modal = styled(ModalBoots)`
     }
   }
 
-  button {
-    width: 300px;
-    height: 60px;
+  .handle-button {
+    width: 200px;
+    height: 45px;
 
-    border: none;
-    background: #51DEB8;
-    border-radius: 50px;
-
-    font-family: Quicksand;
-    font-weight: bold;
-    font-size: 35px;
-    line-height: 62px;
-    text-align: center;
+    margin-top: 50px;
 
     color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+
+    background-color: #43DBB2;
+    border: none;
+    border-radius: 50px;
+
+    transition: ease-in-out 0.2s;
+
+    &:hover {
+      background-color: #33AC91;
+    }
   }
 `
 
