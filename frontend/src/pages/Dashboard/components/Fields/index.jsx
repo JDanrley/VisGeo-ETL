@@ -53,7 +53,7 @@ const Fields = ({fields, tables}) => {
         <section>
           <h1>CAMPOS DISPONÍVEIS</h1>
           <div className="fields-container">
-            {!localStorage.getItem('MODE') === 'debug' ?
+            {localStorage.getItem('MODE') === 'production' ?
               fields.map(eachField => (
                 <span className="fields">
                   {eachField}

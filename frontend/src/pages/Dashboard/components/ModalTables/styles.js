@@ -25,6 +25,10 @@ export const Modal = styled(ModalBoots)`
     }
   }
 
+  .ant-spin-dot-item {
+    background-color: white;
+  }
+
   .modal-content {
     width: 800px;
     height: 600px;

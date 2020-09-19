@@ -47,7 +47,7 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
           Configuração De - Para
         </Modal.Header>
 
-        {spin && <Spin />}
+        {spin && <Spin size="large" />}
 
         {error && (
           <Alert
@@ -72,7 +72,7 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
         )}
 
         <section className="content"> 
-          {!mode === 'debug' 
+          {mode === 'production' 
             ? columns.map(column => (
               <>
                 <section>
