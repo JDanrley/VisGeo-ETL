@@ -95,7 +95,7 @@ O Projeto consiste no desenvolvimento de um sistema web ETL¹ no qual dados geor
 - Basta instalar o **pip3**, pois o **Python3** já vem instalado por padrão.
 - Para isso, basta executar o comando abaixo:
 
-```python
+```
 $ sudo apt install pip3
 ```
 
@@ -116,16 +116,20 @@ apt-get install -y nodejs
 
 **Máquina Virtual**
 
-- Para instalar uma Virtualenv, basta executar:
+- Para instalar a Virtualenv, basta executar:
 
 ```
 $ pip3 install virtualenv
 ```
 
-- Para iniciar o ambiente do Virtualenv, execute:
+- Para criar a Virtualenv do projeto, execute:
 
 ```
 $ virtualenv -p python3 venv
+```
+
+-Para iniciar uma Virtualenv
+```
 $ source venv/bin/activate
 ```
 
@@ -175,17 +179,22 @@ https://nodejs.org/en/download/
 
 **Máquina Virtual**
 
-- Para instalar uma Virtualenv, basta executar:
+- Para instalar a Virtualenv, basta executar:
 
 ```
 $ pip3 install virtualenv
 ```
 
-- Para iniciar o ambiente do Virtualenv, execute:
+- Para criar a Virtualenv do projeto, execute:
 
 ```
 $ virtualenv -p python3 venv
+```
+
+-Para iniciar uma Virtualenv
+```
 $ source venv/bin/activate
+```
 ```
 
 - Após iniciá-lo, instale as dependências do backend, que incluem o framework e as bibliotecas necessárias para funcionamento da API.
