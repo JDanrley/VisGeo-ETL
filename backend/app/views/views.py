@@ -2,7 +2,7 @@
 import os
 
 #Flask modules
-from flask import request, redirect, url_for, render_template, json, Response
+from flask import request, redirect, url_for, render_template, json, Response, jsonify
 from werkzeug.utils import secure_filename
 
 #Custom modules
@@ -37,10 +37,11 @@ def upload():
     return Response(status=201)
     
 
-@app.route('/getFields/', methods=['GET'])
+@app.route('/getFieldsAndTables/', methods=['GET'])
 def fields():
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
-    return shapefile.exportFields()
+    return jsonify(fields=shapefile.getFields(),
+                   tables=connection.getTables())
 
 
 @app.route('/tables')
