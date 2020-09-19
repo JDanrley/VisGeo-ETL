@@ -14,7 +14,7 @@ class Shapefile():
 
     def __init__(self, shapefileAddress):
         self.reader = shapefile.Reader(shapefileAddress)
-        self.shpType = self.reader.shapeTypeName
+        #self.shpType = self.reader.shapeTypeName
         self.fieldTypes = list(self.fieldTypes[field[1]] for field in self.reader.fields)
         self.fields = list(field[0] for field in self.reader.fields)[1:]
         self.data = self.__concatenateRecordsToShapes()
