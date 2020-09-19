@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 import ModalTables from '../ModalTables';
 
-const Fields = ({fields}) => {
+const Fields = ({fields, tables}) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -14,7 +14,7 @@ const Fields = ({fields}) => {
   return (  
     <Container>
       
-      <ModalTables show={openModal} setShow={setOpenModal} />
+      <ModalTables show={openModal} setShow={setOpenModal} tables={tables} />
 
       <div className="fields-search-container">
         <section>

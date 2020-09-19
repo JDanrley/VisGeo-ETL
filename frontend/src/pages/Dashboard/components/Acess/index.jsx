@@ -8,7 +8,7 @@ import ModalConnection from '../../ModalConnection';
 
 import { UploadIcon, SearchIcon, Container } from './styles';
 
-const Acess = ({setFields, changeScreen}) => {  
+const Acess = ({setFields, setTables, changeScreen}) => {  
   const [openConnection, setOpenConnection] = useState(false);
   const { Dragger } = Upload;
 
@@ -32,8 +32,9 @@ const Acess = ({setFields, changeScreen}) => {
 
   async function handleUpload() {
     try {
-      const response = await api.get("/getFields");
-      setFields(response.data);
+      const response = await api.get("/getFieldsAndTables");
+      setFields(response?.data?.fields);
+      setTables(response?.data?.tables)
       changeScreen(true);
     } catch (error) {
       console.log(error);
