@@ -58,4 +58,10 @@ def save():
     global globalTableName
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
     connection.populateTableMultipoint(shapefile.data, shapefile.fields, globalTableName, selectedFields, connection.getColumnsNames(globalTableName))
+    extensions = ['.dbf', '.prj', '.shp', '.shx', '.qix']
+    for extension in extensions:
+        try:
+            os.remove(f'shapefiles/{currentFileName}{extension}')
+        except:
+            pass
     return Response(status=201)
