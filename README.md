@@ -128,7 +128,7 @@ $ pip3 install virtualenv
 $ virtualenv -p python3 venv
 ```
 
--Para iniciar uma Virtualenv
+-Para iniciar a Virtualenv
 ```
 $ source venv/bin/activate
 ```
@@ -191,7 +191,7 @@ $ pip3 install virtualenv
 $ virtualenv -p python3 venv
 ```
 
--Para iniciar uma Virtualenv
+-Para iniciar a Virtualenv
 ```
 $ source venv/bin/activate
 ```
