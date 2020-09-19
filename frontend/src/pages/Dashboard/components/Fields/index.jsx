@@ -3,7 +3,7 @@ import { Dropdown, Menu } from 'antd';
 
 import { Container } from './styles';
 
-const Fields = () => {
+const Fields = ({fields}) => {
   const menu = (
     <Menu>
       <Menu.Item>
@@ -24,15 +24,13 @@ const Fields = () => {
     </Menu>
   );
 
-  const dataForDevelopment = ['Campo-1','Campo-2','Campo-3','Campo-4','Campo-5','Campo-6','Campo-7'];
-
   return (  
     <Container>
       <div className="fields-search-container">
         <section>
           <h1>CAMPOS DISPONÍVEIS</h1>
           <div className="fields-container">
-            {dataForDevelopment.map(eachField => (
+            {fields.map(eachField => (
               <span className="fields">
                 {eachField}
               </span>

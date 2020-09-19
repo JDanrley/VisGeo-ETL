@@ -4,6 +4,7 @@ import { Modal as ModalBoots } from 'react-bootstrap';
 
 import { FaUserAlt } from 'react-icons/fa';
 import { IoIosLock } from 'react-icons/io';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { RiLoginBoxFill } from 'react-icons/ri';
 import { GoDatabase } from 'react-icons/go';
 import { WiCloudyWindy } from 'react-icons/wi';
@@ -15,7 +16,20 @@ export const HostIcon = styled(WiCloudyWindy)`
   transition: ease-in-out 0.2s;
 `;
 
+export const CloseIcon = styled(IoIosCloseCircleOutline)`
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  font-size: 30px;
+  color: #FFF;
+`
+
 export const Modal = styled(ModalBoots)`
+
+  .ant-alert-with-description {
+    margin-bottom: 40px;
+    border-radius: 15px;
+  }
 
   .modal-content {
     width: 800px;
@@ -70,6 +84,7 @@ export const Modal = styled(ModalBoots)`
     justify-items: center;
     align-self: center;
 
+    /* width: 100%; */
     height: max-content;
 
     padding-right: 250px;

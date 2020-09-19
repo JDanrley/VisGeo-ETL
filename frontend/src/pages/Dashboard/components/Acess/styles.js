@@ -4,6 +4,8 @@ import { RiUploadCloud2Line } from 'react-icons/ri';
 import { BsSearch } from 'react-icons/bs';
 
 export const Container = styled.div`
+  width: 100%;
+
   .upload-container {
     display: flex;
     flex-direction: column;
@@ -90,7 +92,7 @@ export const Container = styled.div`
   .upload-search-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     width: 100%;
