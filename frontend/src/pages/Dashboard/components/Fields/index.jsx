@@ -1,31 +1,21 @@
-import React from 'react'
-import { Dropdown, Menu } from 'antd';
+import React, { useState } from 'react'
 
 import { Container } from './styles';
 
+import ModalTables from '../ModalTables';
+
 const Fields = ({fields}) => {
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        Coluna 1
-      </Menu.Item>
+  const [openModal, setOpenModal] = useState(false);
 
-      <Menu.Item>
-        Coluna 2
-      </Menu.Item>
-
-      <Menu.Item>
-        Coluna 3
-      </Menu.Item>
-
-      <Menu.Item>
-        Coluna 4
-      </Menu.Item>
-    </Menu>
-  );
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  }
 
   return (  
     <Container>
+      
+      <ModalTables show={openModal} setShow={setOpenModal} />
+
       <div className="fields-search-container">
         <section>
           <h1>CAMPOS DISPONÍVEIS</h1>
@@ -41,14 +31,7 @@ const Fields = ({fields}) => {
 
         <section>
           <div className="fields-container">
-            <Dropdown 
-              trigger={["click"]}
-              overlay={menu} >
-              <span className="title">Escolha a coluna</span>
-            </Dropdown>
-
-
-            <button className="handle-button">select-test</button>
+            <button onClick={handleOpenModal} className="handle-button">Selecionar tabela</button>
           </div>
         </section>
       </div>
