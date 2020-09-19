@@ -14,6 +14,7 @@ from app.infrastructure.ShapefileRepository import ShapefileRepository
 connection = ShapefileRepository()
 credentials = dict()
 currentFileName = None
+globalTableName = None
 
 
 @app.route('/auth', methods=['GET', 'POST'])
@@ -40,16 +41,21 @@ def upload():
 @app.route('/getFieldsAndTables/', methods=['GET'])
 def fields():
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
-    return jsonify(fields=shapefile.getFields(),
-                   tables=connection.getTables())
-
-
-@app.route('/tables')
-def tables():
-    global connection
-    return json.dumps(connection.getTables())
+    return jsonify(fields = shapefile.getFields(),
+                   tables = connection.getTables())
 
 
 @app.route('/columns/<tableName>', methods=['GET'])
 def columns(tableName):
+    global globalTableName
+    globalTableName = tableName
     return json.dumps(connection.getColumnsNames(tableName))
+
+
+@app.route('/save', methods=['POST'])
+def save():
+    selectedFields = request.json["message"]
+    global globalTableName
+    shapefile = Shapefile(f'shapefiles/{currentFileName}')
+    connection.populateTableMultipoint(shapefile.data, shapefile.fields, globalTableName, selectedFields, connection.getColumnsNames(globalTableName))
+    return Response(status=201)
