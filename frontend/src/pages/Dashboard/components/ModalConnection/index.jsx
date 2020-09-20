@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Alert } from 'antd';
 
-import api from '../../../services/api';
+import api from '../../../../services/api';
 
 import { UserIcon, Lock, PortIcon, DatabaseIcon, 
     Modal, HostIcon } from './styles';
@@ -16,6 +16,21 @@ const ModalConnection = ({open, close}) => {
   const [host, setHost] = useState('');
   const [port, setPort] = useState('');
   const [database, setDatabase] = useState('');
+
+  useEffect(()=>{
+
+		window.addEventListener('keypress', (event)=>{
+      if(event.key === "Enter") {
+        handleConnect();
+      }
+		})
+
+		return ()=> {
+			window.removeEventListener('keypress', ()=> {
+				return;
+			});
+		}
+	},[]);
 
   async function handleConnect() {
     const data = {      
