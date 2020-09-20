@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Spin, Alert } from 'antd';
+
 import api from '../../../../services/api';
 
-import { Spin, Alert } from 'antd';
+import RenderColumnsAndFields from './components/RenderColumnsAndFields';
 
 import { Modal } from './styles';
 
@@ -46,89 +48,40 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
         <Modal.Header>
           Configuração De - Para
         </Modal.Header>
+        <section className="center">
+          {spin && <Spin size="large" />}
 
-        {spin && <Spin size="large" />}
+          {error && (
+            <Alert
+              message="Erro"
+              description={'Falha ao comunicar com o servidor'}
+              type="error"
+              closable
+              showIcon
+              onClose={()=> setError(false)}
+            />
+          )}
 
-        {error && (
-          <Alert
-            message="Erro"
-            description={'Falha ao comunicar com o servidor'}
-            type="error"
-            closable
-            showIcon
-            onClose={()=> setError(false)}
-          />
-        )}
+          {success && (
+            <Alert
+              message="Sucesso"
+              description={'Arquivos enviados com sucesso'}
+              type="success"
+              closable
+              showIcon
+              onClose={()=> setSuccess(false)}
+            />
+          )}
 
-        {success && (
-          <Alert
-            message="Sucesso"
-            description={'Arquivos enviados com sucesso'}
-            type="success"
-            closable
-            showIcon
-            onClose={()=> setSuccess(false)}
-          />
-        )}
-
-        <section className="content"> 
           {mode === 'production' 
-            ? columns.map(column => (
-              <>
-                <section>
-                  <span>
-                    {column}
-                  </span>              
-                  
-                  <select
-                    style={{ width: '100%' }}
-                    id={column}
-                    name="teste"
-                    title="teste"
-                  >
-                    <>
-                      <option>
-                        Escolha um campo
-                      </option>
-                      {fields.map(item =>
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      )}
-                    </>
-                  </select>
-                </section>
-              </>
-            )) : columnsDebug.map(column => (
-              <>
-                <section>
-                  <span>
-                    {column}
-                  </span>              
-                  
-                  <select
-                    style={{ width: '100%' }}
-                    id={column}
-                    name="teste"
-                    title="teste"
-                  >
-                    <>
-                      <option>
-                        Escolha um campo
-                      </option>
-                      {fieldsDebug.map(item =>
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                      )}
-                    </>
-                  </select>
-                </section>
-              </>
-            ))}
+            ? <RenderColumnsAndFields columns={columns} fields={fields} />
+            : <RenderColumnsAndFields columns={columnsDebug} fields={fieldsDebug} />     
+          }
 
-          <button onClick={handleSend}>Enviar campos</button>
         </section>
+        <Modal.Footer>
+          <button onClick={handleSend}>Enviar campos</button>
+        </Modal.Footer>
       </Modal>      
     </>
   )

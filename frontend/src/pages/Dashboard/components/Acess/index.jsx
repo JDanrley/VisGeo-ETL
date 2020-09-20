@@ -4,7 +4,7 @@ import api from '../../../../services/api';
 
 import { Upload, message } from 'antd';
 
-import ModalConnection from '../../ModalConnection';
+import ModalConnection from '../ModalConnection';
 
 import { UploadIcon, SearchIcon, Container } from './styles';
 

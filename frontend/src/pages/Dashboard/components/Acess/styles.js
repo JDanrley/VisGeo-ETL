@@ -21,6 +21,10 @@ export const Container = styled.div`
       background: transparent;
     }
 
+    button.upload-dash {
+      margin: 16.5px 0px;
+    }
+
     .upload-dash {
       display: flex;
       flex-direction: column;
@@ -29,7 +33,7 @@ export const Container = styled.div`
 
       width: 100%;
       height: 250px;
-
+      
       padding-top: 35px;
       padding-bottom: 35px;
 

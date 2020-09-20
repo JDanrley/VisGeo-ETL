@@ -37,10 +37,18 @@ export const Modal = styled(ModalBoots)`
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     border-radius: 50px;
 
-    overflow: scroll;
 
-    ::-webkit-scrollbar{
-      visibility:hidden;
+    .center {
+      display: flex;
+      flex-direction: column;
+      height: 400px;
+      overflow: scroll;
+
+      ::-webkit-scrollbar, 
+      ::-webkit-scrollbar-track, 
+      ::-webkit-scrollbar-thumb {
+        display: none;
+      }
     }
   }
 
@@ -62,37 +70,12 @@ export const Modal = styled(ModalBoots)`
     max-width: 100%;
   }
 
-  .content {
-    display: flex;
-    flex-direction: column;
+  .modal-footer {
     justify-content: center;
-    align-items: center;
-
-
-    section {
-      width: 80%;
-      display: flex;
-      height: 70px;    
-      border-radius: 8px;
-      margin: 10px 0px;
-      
-      justify-content: space-between;
-      padding: 0px 40px;
-      align-items: center;
- 
-      background: antiquewhite;
-
-      select {
-        width: 200px !important;
-        border-radius: 8px;        
-      }
-    }
+    border: none;
   }
 
   button {
-    position: fixed;
-    bottom: 200px;
-
     padding: 10px 40px;
     border: none;
     border-radius: 8px;
