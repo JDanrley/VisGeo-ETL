@@ -7,6 +7,18 @@ export const Content = styled.section`
   align-items: center;
 
 
+  h1 {
+    align-self: end;
+    padding-left: 100px;
+    font-size: 30px;
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 37px;
+    text-align: center;
+    color: #ffffff;
+  }
+
   section {
     border-radius: 50px;
     background: #FFFFFF;

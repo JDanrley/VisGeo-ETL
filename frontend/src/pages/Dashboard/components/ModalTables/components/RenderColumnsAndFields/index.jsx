@@ -4,9 +4,10 @@ import { Content } from './styles';
 
 const RenderColumnsAndFields = ({columns, fields}) => {
   return (
-    <Content> 
-      {columns.map(column => (
-        <>
+    <Content>
+      <>
+        <h1>Colunas</h1>
+        {columns.map(column => (
           <section>
             <span>
               {column}
@@ -29,8 +30,8 @@ const RenderColumnsAndFields = ({columns, fields}) => {
               </>
             </select>
           </section>
-        </>
-      ))}
+        ))}
+      </>
     </Content>
   )
 }

@@ -18,7 +18,6 @@ const ModalConnection = ({open, close}) => {
   const [database, setDatabase] = useState('');
 
   useEffect(()=>{
-
 		window.addEventListener('keypress', (event)=>{
       if(event.key === "Enter") {
         handleConnect();

@@ -46,7 +46,7 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
     <>
       <Modal show={show} onHide={()=> setShow(false)}>
         <Modal.Header>
-          Configuração De - Para
+          CONFIGURAÇÃO DE <span style={{marginBottom: '15px'}}>→</span> PARA
         </Modal.Header>
         <section className="center">
           {spin && <Spin size="large" />}

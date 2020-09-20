@@ -78,7 +78,7 @@ export const Modal = styled(ModalBoots)`
   button {
     padding: 10px 40px;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
 
     color: #FFFFFF;
     font-size: 20px;
