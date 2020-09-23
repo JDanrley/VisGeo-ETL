@@ -31,7 +31,7 @@ class ShapefileRepository():
         #getting the columns datatype
         #cursor.execute(f"SELECT data_type FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{tableName}'")
         columns = [column[0] for column in self.cursor.fetchall()]
-        return columns
+        return columns[:-1] #removing 'geom' column
     
 
     def tupleToQuery(self, tupleFields, tableColumnsList, tableName):
@@ -49,8 +49,8 @@ class ShapefileRepository():
                 columnsInsert += f"'{tupleFields[valueIndex]}'" + ', '    
             else:
                 columnsInsert += str(tupleFields[valueIndex]) + ', '
-            
-        return f"INSERT INTO {tableName} ({columnsArgs}) VALUES ({columnsInsert} ST_GeomFromText('{tupleFields[-1].wkt}', 4674))"
+        print(tupleFields)
+        return f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({columnsInsert} ST_GeomFromText('{tupleFields[-1].wkt}', 4674))"
         
     
     def shpToPostgis(self, DataFrame, tableColumnsList, tableName):

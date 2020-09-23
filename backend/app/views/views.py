@@ -57,7 +57,7 @@ def save():
     selectedFields = request.json["message"]
     global globalTableName
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
-    connection.populateTableMultipoint(shapefile.data, shapefile.fields, globalTableName, selectedFields, connection.getColumnsNames(globalTableName))
+    connection.populate(shapefile.geoType, shapefile.data, shapefile.fields, globalTableName, selectedFields, connection.getColumnsNames(globalTableName))
     return Response(status=201)
 
 @app.route('/savePolygon', methods=['POST'])

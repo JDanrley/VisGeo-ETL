@@ -1,25 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Spin, Alert } from 'antd';
+
 import api from '../../../../services/api';
 
-import { Select } from 'antd';
+import RenderColumnsAndFields from './components/RenderColumnsAndFields';
+
 import { Modal } from './styles';
 
-const ModalTable = ({show, setShow, fields, tableName}) => {
+const ModalTable = ({show, setShow, fields, columns, tableName}) => {
+  /* CODIGO PARA DEBUG */
+  const mode = localStorage.getItem('MODE');
 
-  const [columns, setColumns] = useState([]);
+  const columnsDebug = ['Coluna 1','Coluna 2','Coluna 3','Coluna 4','Coluna 5','Coluna 6'];
+  const fieldsDebug = ['Campo 1','Campo 2','Campo 3','Campo 4','Campo 5','Campo 6'];
 
-  async function handleGetColumns() {
-    const response = await api.get(`/columns/${tableName}`);
-    setColumns(response.data);
-    console.log(response.data)
-  }
+  /* CODIGO PARA DEBUG */
+
+
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [spin, setSpin] = useState(false);
 
   async function handleSend() {
     const data = [];
+    setSpin(true);
 
-    columns.map(column => {
+    columns.forEach(column => {
       const field = document.querySelector(`#${column}`);
-      console.log(field.value)
       if(field.value !== "Escolha um campo") {
         data.push(field.value);
       }
@@ -27,54 +34,54 @@ const ModalTable = ({show, setShow, fields, tableName}) => {
 
     try {
       await api.post('/save', { message: data });
-      console.log('sucesso');
+      setSuccess(true);
     } catch (a) {
-      console.log('deu ruim');
+      setError(true);
     }
 
-    console.log(data)
+    setSpin(false);
   }
 
   return (
     <>
       <Modal show={show} onHide={()=> setShow(false)}>
         <Modal.Header>
-          Configuração De - Para
+          CONFIGURAÇÃO DE <span style={{marginBottom: '15px'}}>→</span> PARA
         </Modal.Header>
-        <section className="content">        
-          {columns.map(column => (
-            <>
-              <section>
-                <span>
-                  {column}
-                </span>              
-                
-                <select
-                  style={{ width: '100%' }}
-                  id={column}
-                  name="teste"
-                  title="teste"
-                >
-                  <>
-                    <option>
-                      Escolha um campo
-                    </option>
-                    {fields.map(item =>
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    )}
-                  </>
-                </select>
-              </section>
-            </>
-          ))}
+        <section className="center">
+          {spin && <Spin size="large" />}
 
-          <button onClick={handleSend}>Enviar campos</button>
+          {error && (
+            <Alert
+              message="Erro"
+              description={'Falha ao comunicar com o servidor'}
+              type="error"
+              closable
+              showIcon
+              onClose={()=> setError(false)}
+            />
+          )}
+
+          {success && (
+            <Alert
+              message="Sucesso"
+              description={'Arquivos enviados com sucesso'}
+              type="success"
+              closable
+              showIcon
+              onClose={()=> setSuccess(false)}
+            />
+          )}
+
+          {mode === 'production' 
+            ? <RenderColumnsAndFields columns={columns} fields={fields} />
+            : <RenderColumnsAndFields columns={columnsDebug} fields={fieldsDebug} />     
+          }
+
         </section>
-
-
-
+        <Modal.Footer>
+          <button onClick={handleSend}>Enviar campos</button>
+        </Modal.Footer>
       </Modal>      
     </>
   )

@@ -10,10 +10,11 @@ class Shapefile():
 
     
     def getFields(self):
-        return list(self.DataDrame.columns[:-1])
+        return list(self.DataDrame.columns)
     
 
     def converted(self, selectedFields):
+        selectedFields.append('geometry')
         return self.DataDrame[selectedFields]
 
     

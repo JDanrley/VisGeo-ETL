@@ -45,8 +45,7 @@ export const Container = styled.div`
       flex-direction: row;
       justify-content: center;
       align-items: center;
-
-      border: 2px solid red;
+      
       font-size: 25px;
       color: #43DBB2;
       font-weight: 600;
