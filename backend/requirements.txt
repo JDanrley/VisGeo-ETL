@@ -5,6 +5,7 @@ geopandas==0.8.1
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
+psycopg2-binary
 py-postgresql==1.2.1
 pyshp==2.1.2
 Werkzeug==1.0.1
