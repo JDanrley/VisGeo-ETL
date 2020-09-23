@@ -1,5 +1,5 @@
 import postgresql
-
+import psycopg2
 
 class ShapefileRepository():
 
@@ -11,110 +11,59 @@ class ShapefileRepository():
 
     def credentialsAreValid(self, credentials):
         try:
-            self.connector = postgresql.open(f'pq://{credentials["username"]}:{credentials["password"]}@{credentials["host"]}:{credentials["port"]}/{credentials["database"]}')
-            self.isConnected = True
-            self.credentials = credentials
+            #self.connector = postgresql.open(f'pq://{credentials["username"]}:{credentials["password"]}@{credentials["host"]}:{credentials["port"]}/{credentials["database"]}')
+            self.connector = psycopg2.connect(f"dbname='{credentials['database']}' user='{credentials['username']}' host='{credentials['host']}' password='{credentials['password']}' port='{credentials['port']}'")
+            self.cursor = self.connector.cursor()
             return True
         except:
             return False
 
     
     def getTables(self):
-        tables = self.connector.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")
+        self.cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")
         defaultTables = ["geography_columns", "geometry_columns", "spatial_ref_sys"]
-        self.tables = list(table[0] for table in tables if table[0] not in defaultTables)
+        self.tables = list(table[0] for table in self.cursor.fetchall() if table[0] not in defaultTables)
         return self.tables
 
     
     def getColumnsNames(self, tableName):
-        columns = self.connector.query(f"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{tableName}'")
-        columns = [column[0] for column in columns]
-        return columns[:-1]
+        self.cursor.execute(f"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{tableName}'")
+        #getting the columns datatype
+        #cursor.execute(f"SELECT data_type FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{tableName}'")
+        columns = [column[0] for column in self.cursor.fetchall()]
+        return columns
     
 
-    def populateTableMultipoint(self, data, shapefileFields, tableName, selectedFields, columnsList):
-        #selectedFields = ['fid', 'idponto', 'deponto'] -> example
-        for row in data:
-            selectedFieldsIndex = list()
-
-            for field in selectedFields:
-                selectedFieldsIndex.append(shapefileFields.index(field))   #getting the index for each selected field
-            
-            selectedRecords = list()
-            
-            for selectedIndex in selectedFieldsIndex:               #filtering the values according to the index
-                selectedRecords.append(row[:-1][selectedIndex])
-
-            query = self.queryGeneratorMultipoint(tableName, columnsList, selectedRecords, row[-1])
-            self.connector.execute(query)
-
-    
-    def queryGeneratorMultipoint(self, tableName, columnsList, inputValuesList, points, ersi = 4674):
+    def tupleToQuery(self, tupleFields, tableColumnsList, tableName):
+        tupleFields = tupleFields[1:]
+        columnsInsert = str()
         columnsArgs = str()
-        valuesArgs = str()
         
-        for arg in columnsList:
+        for arg in tableColumnsList:
             columnsArgs += str(arg) + ', '
         columnsArgs = columnsArgs[:-2]
-
-        for arg in inputValuesList:
-            if type(arg) == str:
-                valuesArgs += f"'{arg}'" + ', '
+        
+        for valueIndex in range(len(tupleFields) - 1):
+            
+            if type(tupleFields[valueIndex]) == str:
+                columnsInsert += f"'{tupleFields[valueIndex]}'" + ', '    
             else:
-                valuesArgs += str(arg) + ', '
-        valuesArgs = valuesArgs[:-2]
-
-        query = f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({valuesArgs}, ST_GeomFromText('MULTIPOINT({points[0][0]} {points[0][1]})', {ersi}))"
-        return query
-
-
-    def queryGeneratorPolygon(self, tableName, columnsList, inputValuesList, geom, ersi = 4674):
-        columnsArgs = str()
-        valuesArgs = str()
-        geomArgs = str()
+                columnsInsert += str(tupleFields[valueIndex]) + ', '
+            
+        return f"INSERT INTO {tableName} ({columnsArgs}) VALUES ({columnsInsert} ST_GeomFromText('{tupleFields[-1].wkt}', 4674))"
         
-        for arg in columnsList:
-            columnsArgs += str(arg) + ', '
-        columnsArgs = columnsArgs[:-2]
-
-        for arg in inputValuesList:
-            if type(arg) == str:
-                valuesArgs += f"'{arg}'" + ', '
+    
+    def shpToPostgis(self, DataFrame, tableColumnsList, tableName):
+        for line in DataFrame.itertuples():
+            if None not in line:
+                self.cursor.execute(self.tupleToQuery(line, tableColumnsList, tableName))
             else:
-                valuesArgs += str(arg) + ', '
-        valuesArgs = valuesArgs[:-2]
-
-        for pair in geom:
-            geomArgs += str(pair[0]) + ' ' + str(pair[1]) + ', '
-        geomArgs = geomArgs[:-2]
-        
-        query = f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({valuesArgs}, ST_GeomFromText('POLYGON(({geomArgs}))', {ersi}))"
-        return query
-    
-    
-    def populateTablePolygon(self, data, shapefileFields, tableName, selectedFields, columnsList):
-        #selectedFields = ['fid', 'idponto', 'deponto'] -> example
-        
-        for row in data:
-            selectedFieldsIndex = list()
-
-            for field in selectedFields:
-                selectedFieldsIndex.append(shapefileFields.index(field))   #getting the index for each selected field
-            
-            selectedRecords = list()
-            
-            for selectedIndex in selectedFieldsIndex:               #filtering the values according to the index
-                selectedRecords.append(row[:-1][selectedIndex])
-            
-            
-            query = self.queryGeneratorPolygon(tableName, columnsList, selectedRecords, row[-1])
-            
-            self.connector.execute(query)
-            
-
-    def close(self):
-        self.connector = None
-        self.isConnected = False
-        self.tables = None
-
-    
+                copy = list(line).copy()
+                line = list()
+                for field in copy:
+                    if field != None:
+                        line.append(field)
+                    else:
+                        line.append(0)
+                self.cursor.execute(self.tupleToQuery(line, tableColumnsList, tableName))
+        self.connector.commit()
