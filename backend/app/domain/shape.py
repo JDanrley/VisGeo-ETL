@@ -1,9 +1,26 @@
 import shapefile
-import postgresql
 from flask import json
+import geopandas as gpd
+
 
 class Shapefile():
 
+    def __init__(self, shapefileAddress):
+        self.DataDrame = gpd.read_file(shapefileAddress)
+
+    
+    def getFields(self):
+        return list(self.DataDrame.columns)
+    
+
+    def converted(self, selectedFields):
+        selectedFields.append('geometry')
+        return self.DataDrame[selectedFields]
+
+    
+
+
+'''
     fieldTypes = {
         "C": str,
         "N": int,
@@ -50,7 +67,7 @@ class Shapefile():
             index[field] = indexCount
             indexCount += 1
         return index
-
+'''
         
 
 
