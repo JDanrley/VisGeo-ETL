@@ -17,19 +17,19 @@ const ModalConnection = ({open, close}) => {
   const [port, setPort] = useState('');
   const [database, setDatabase] = useState('');
 
-  useEffect(()=>{
-		window.addEventListener('keypress', (event)=>{
-      if(event.key === "Enter") {
-        handleConnect();
-      }
-		})
+  // useEffect(()=>{
+	// 	window.addEventListener('keypress', (event)=>{
+  //     if(event.key === "Enter") {
+  //       handleConnect();
+  //     }
+	// 	})
 
-		return ()=> {
-			window.removeEventListener('keypress', ()=> {
-				return;
-			});
-		}
-	},[]);
+	// 	return ()=> {
+	// 		window.removeEventListener('keypress', ()=> {
+	// 			return;
+	// 		});
+	// 	}
+	// },[]);
 
   async function handleConnect() {
     const data = {      
@@ -39,6 +39,8 @@ const ModalConnection = ({open, close}) => {
       port,
       database
     };
+
+    console.log(data)
 
     /* CODIGO PARA DEBUG */
     if (username === 'debug-develop') {

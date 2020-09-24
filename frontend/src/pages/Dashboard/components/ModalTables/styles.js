@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 import { Modal as ModalBoots} from 'react-bootstrap';
 
+import { BsArrowRight } from 'react-icons/bs';
+
+export const ArrowRight = styled(BsArrowRight)`
+  margin-top: -2px
+`
+
 export const Modal = styled(ModalBoots)`
   width: 100%;
   height: 100vh;
