@@ -31,12 +31,20 @@ export default createGlobalStyle`
   }
 
   .ant-dropdown-menu {
+    height: 250px;
+    overflow: scroll;
     background: #FFFFFF;
     border: 4px solid rgba(67, 219, 178, 0.25);
     box-sizing: border-box;
     backdrop-filter: blur(4px);
     padding: 20px 10px;
     border-radius: 45px;
+
+    ::-webkit-scrollbar, 
+    ::-webkit-scrollbar-track, 
+    ::-webkit-scrollbar-thumb {
+      display: none;
+    }
   }
 
   .ant-dropdown-menu-item {

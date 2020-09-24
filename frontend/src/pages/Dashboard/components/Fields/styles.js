@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { BsArrowRight } from 'react-icons/bs';
+
+export const ArrowRight = styled(BsArrowRight)`
+  margin-top: -2px;
+`
 
 export const Container = styled.div`
   width: 100%;
@@ -102,7 +107,7 @@ export const Container = styled.div`
   }
 
   .handle-button {
-    width: 220px;
+    width: 260px;
     height: 70px;
 
     margin-top: 50px;

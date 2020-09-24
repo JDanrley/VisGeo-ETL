@@ -5,12 +5,13 @@ import api from '../../../../services/api';
 import { Menu, Dropdown, message } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
-import { Container } from './styles';
+import { Container, ArrowRight } from './styles';
 
 import ModalTables from '../ModalTables';
 
 const Fields = ({fields, tables}) => {
-  const fieldsDebug = ['Campo 1','Campo 2','Campo 3','Campo 4','Campo 5','Campo 6',];
+  const fieldsDebug = ['Campo 1','Campo 2','Campo 3','Campo 4','Campo 5','Campo 6'];
+  const tablesDebug = ['Tabela 1','Tabela 2','Tabela 3','Tabela 4','Tabela 5','Tabela 6'];
 
   const [columns, setColumns] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -25,17 +26,25 @@ const Fields = ({fields, tables}) => {
     message.info(`Tabela ${table} selecionada`);
   }
 
-
   const menu = (
     <Menu>
-      {tables.map(table => (
-        <Menu.Item 
-          onClick={()=> handleGetColumns(table)} 
-          key={table}
-        >
-          {table}
-        </Menu.Item>
-      ))}
+      {localStorage.getItem('MODE') === 'production' ?
+        tables.map(table => (
+          <Menu.Item 
+            onClick={()=> handleGetColumns(table)} 
+            key={table}
+          >
+            {table}
+          </Menu.Item>
+        )) : 
+        tablesDebug.map(table => (
+          <Menu.Item 
+            onClick={()=> handleGetColumns(table)} 
+            key={table}
+          >
+            {table}
+          </Menu.Item>
+        ))}
     </Menu>
   );
 
@@ -72,11 +81,12 @@ const Fields = ({fields, tables}) => {
 
             <Dropdown overlay={menu} trigger={['click']}>
               <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                ESCOLHA A COLUNA <DownOutlined className="down-arrow-menu" />
+                SELECIONE UMA TABELA <DownOutlined className="down-arrow-menu" />
               </a>
             </Dropdown>
 
-            <button onClick={handleOpenModal} className="handle-button">Selecionar tabela</button>
+            <button onClick={handleOpenModal} className="handle-button">
+              Configurar de <ArrowRight /> para</button>
           </div>
         </section>
       </div>
