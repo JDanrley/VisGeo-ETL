@@ -55,15 +55,17 @@ class ShapefileRepository():
     
     def shpToPostgis(self, DataFrame, tableColumnsList, tableName):
         for line in DataFrame.itertuples():
-            if None not in line:
-                self.cursor.execute(self.tupleToQuery(line, tableColumnsList, tableName))
-            else:
-                copy = list(line).copy()
-                line = list()
-                for field in copy:
-                    if field != None:
-                        line.append(field)
-                    else:
-                        line.append(0)
-                self.cursor.execute(self.tupleToQuery(line, tableColumnsList, tableName))
+            if self.isThisMultiShape(line, tableColumnsList, tableName):
+                continue
+            self.cursor.execute(self.tupleToQuery(line, tableColumnsList, tableName))
         self.connector.commit()
+
+
+    def isThisMultiShape(self, shapefileRegister, tableColumnsList, tableName):
+        if shapefileRegister[-1].type in ['MultiPolygon', 'MultiLineString']:
+            for subShape in list(shapefileRegister[-1].geoms):
+                tempList = list(shapefileRegister)[:-1]
+                tempList.append(subShape)
+                self.cursor.execute(self.tupleToQuery(tempList, tableColumnsList, tableName))
+            return True
+        return False
