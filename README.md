@@ -6,4 +6,10 @@
 
 ![VisGeo - Card02](https://user-images.githubusercontent.com/57918707/93689902-54f54a80-faa9-11ea-8bb1-c1e6d8602069.png)
 
+## Novas funcionalidades
+
+Nesta nova versão, a VisGeo consegue expandir os tipos geométricos "MultiPolygon" e "MultiLinestring" em objetos de tipo "Polygon" e "Linestring", respectivamente.
+Esta funcionalidade foi definida como um requisto pelo cliente, pois os dados precisam ser de tipos homogêneos para que sejam devidamente comportados na base de dados criada para os shapefiles convertidos.
+
+
 
