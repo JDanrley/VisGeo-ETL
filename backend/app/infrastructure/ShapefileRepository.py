@@ -62,7 +62,7 @@ class ShapefileRepository():
 
 
     def isThisMultiShape(self, shapefileRegister, tableColumnsList, tableName):
-        if shapefileRegister[-1].type in ['MultiPolygon', 'MultiLineString']:
+        if shapefileRegister[-1].type in ['MultiPolygon', 'MultiLineString', 'MultiPoint']:
             for subShape in list(shapefileRegister[-1].geoms):
                 tempList = list(shapefileRegister)[:-1]
                 tempList.append(subShape)
