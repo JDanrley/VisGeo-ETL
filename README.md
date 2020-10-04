@@ -12,6 +12,10 @@
 
 - Alguns dos shapefiles possuem objetos com tipos geométricos dinâmicos, alternando entre **Polígono** e **Multipolígono**, **Linha** e **Multilinha**, **Ponto** e **Multiponto**. Por isso, os campos **Multi** foram convertidos para os tipos padrões enviados pelo cliente, ou seja, **Polígono, Linha e Ponto**, e adicionada uma mensagem informando que foram inseridas mais linhas na tabela destino do que possuem no dado fonte.
 
+- Após realizar o upload e conversão do shapefile, caso haja algum objeto geográfico expandido, a mensagem abaixo é exibida ao usuário:
+
+![Log-presentation](https://user-images.githubusercontent.com/45850297/95005278-b0a4f500-05cc-11eb-8b3a-dc79c0c11afa.png)
+
 - Esta funcionalidade foi definida como um requisto pelo cliente, pois os dados precisam ser de tipos homogêneos para que sejam devidamente comportados na base de dados criada para os shapefiles convertidos.
 
 
