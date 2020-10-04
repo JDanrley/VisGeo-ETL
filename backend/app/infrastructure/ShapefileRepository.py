@@ -49,7 +49,6 @@ class ShapefileRepository():
                 columnsInsert += f"'{tupleFields[valueIndex]}'" + ', '    
             else:
                 columnsInsert += str(tupleFields[valueIndex]) + ', '
-        print(tupleFields)
         return f"INSERT INTO {tableName} ({columnsArgs}, GEOM) VALUES ({columnsInsert} ST_GeomFromText('{tupleFields[-1].wkt}', 4674))"
         
     
