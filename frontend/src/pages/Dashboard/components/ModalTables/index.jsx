@@ -16,10 +16,11 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
 
   /* CODIGO PARA DEBUG */
 
-
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
   const [spin, setSpin] = useState(false);
+
 
   async function handleSend() {
     const data = [];
@@ -33,7 +34,9 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
     });
 
     try {
-      await api.post('/save', { message: data });
+      const response = await api.post('/save', { message: data });
+      setMessage(response?.data?.message);
+      
       setSuccess(true);
     } catch (a) {
       setError(true);
@@ -65,7 +68,7 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
           {success && (
             <Alert
               message="Sucesso"
-              description={'Arquivos enviados com sucesso'}
+              description={message || 'Arquivos enviados com sucesso'}
               type="success"
               closable
               showIcon
