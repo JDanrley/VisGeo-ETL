@@ -51,23 +51,6 @@ def columns(tableName):
     globalTableName = tableName
     return json.dumps(connection.getColumnsNames(tableName))
 
-'''
-@app.route('/save', methods=['POST'])
-def save():
-    selectedFields = request.json["message"]
-    global globalTableName
-    shapefile = Shapefile(f'shapefiles/{currentFileName}')
-    connection.populate(shapefile.geoType, shapefile.data, shapefile.fields, globalTableName, selectedFields, connection.getColumnsNames(globalTableName))
-    return Response(status=201)
-
-@app.route('/savePolygon', methods=['POST'])
-def savePolygon():
-    selectedFields = request.json["message"]
-    global globalTableName
-    shapefile = Shapefile(f'shapefiles/{currentFileName}')
-    connection.populateTablePolygon(shapefile.data, shapefile.fields, globalTableName, selectedFields, connection.getColumnsNames(globalTableName))
-    return Response(status=201)
-'''
 
 @app.route('/save', methods=['POST'])
 def save():
@@ -75,5 +58,5 @@ def save():
     global globalTableName
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
     shapefile = shapefile.converted(selectedFields)
-    connection.shpToPostgis(shapefile, connection.getColumnsNames(globalTableName), globalTableName)
-    return Response(status = 201)
+    returnedMessage = connection.shpToPostgis(shapefile, connection.getColumnsNames(globalTableName), globalTableName)
+    return jsonify(message = returnedMessage)
