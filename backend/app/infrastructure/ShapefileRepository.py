@@ -54,11 +54,16 @@ class ShapefileRepository():
         
     
     def shpToPostgis(self, DataFrame, tableColumnsList, tableName):
+        convertedLines = int()
         for line in DataFrame.itertuples():
             if self.isThisMultiShape(line, tableColumnsList, tableName):
+                convertedLines += 1
                 continue
             self.cursor.execute(self.tupleToQuery(line, tableColumnsList, tableName))
         self.connector.commit()
+        if convertedLines == 0 and convertedLines != DataFrame.shape[0]:
+            return "Dados extraídos e salvos com sucesso"
+        return f"Dados salvos com sucesso. {convertedLines} novas linhas foram criadas, objetos de forma tipo MULTI"
 
 
     def isThisMultiShape(self, shapefileRegister, tableColumnsList, tableName):
