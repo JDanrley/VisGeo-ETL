@@ -18,5 +18,4 @@
 
 - Esta funcionalidade foi definida como um requisto pelo cliente, pois os dados precisam ser de tipos homogêneos para que sejam devidamente comportados na base de dados criada para os shapefiles convertidos.
 
-
-
+![Burndown-chart](https://user-images.githubusercontent.com/45850297/95025034-33759080-065d-11eb-9996-76cdf454a6d9.png)
