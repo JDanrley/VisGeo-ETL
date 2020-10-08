@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 #Custom modules
 from app import app
 from app.domain.shape import Shapefile
+from app.domain.table import Table
 from app.infrastructure.ShapefileRepository import ShapefileRepository
 
 #Global variables
@@ -60,3 +61,11 @@ def save():
     shapefile = shapefile.converted(selectedFields)
     returnedMessage = connection.shpToPostgis(shapefile, connection.getColumnsNames(globalTableName), globalTableName)
     return jsonify(message = returnedMessage)
+
+
+@app.route('/recoverFile')
+def recoverFile():
+    tableName = request.json["selectedTable"]
+    selectedTable = Table(tableName, connection.connector())
+    selectedTable.extractShapefile()
+    return Response(status=201)
