@@ -10,4 +10,4 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 CORS(app)
 
-from app.views import views
+from app.view import view
