@@ -9,9 +9,8 @@ class Table():
         self.dataFrame = gpd.GeoDataFrame.from_postgis(query, self.connector)
     
 
-    def extractShapefile(self, enc = "UTF-8"):
-        self.dataFrame.to_file(f'{self.name}',enconding = enc)
-        self.dataFrame.to_file()
+    def extractShapefile(self, tableName, downloadFolder, enc = "UTF-8"):
+        self.dataFrame.to_file(f'/{downloadFolder}/{tableName}', enconding = enc)
         return self.name
 
 

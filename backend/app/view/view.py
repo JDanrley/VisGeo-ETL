@@ -3,18 +3,17 @@ import os
 import zipfile
 
 #Flask modules
-from flask import request, redirect, url_for, render_template, json, Response, jsonify, send_file
+from flask import request, redirect, url_for, render_template, json, Response, jsonify, send_file, send_from_directory
 from werkzeug.utils import secure_filename
 
 #Custom modules
 from app import app
 from app.domain.shape import Shapefile
 from app.domain.table import Table
-from app.infrastructure.ShapefileRepository import ShapefileRepository
+from app.infrastructure.shapefileRepository import ShapefileRepository
 
 #Global variables
 connection = ShapefileRepository()
-credentials = dict()
 currentFileName = None
 globalTableName = None
 
@@ -59,22 +58,36 @@ def save():
     selectedFields = request.json["message"]
     global globalTableName
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
+    shapefile.format(selectedFields)
     returnedMessage = connection.shpToPostgis(shapefile, connection.getColumnsNames(globalTableName), globalTableName)
     os.execv(f'{UPLOAD_FOLDER}', f'del {currentFileName}.*')
     return jsonify(message = returnedMessage)
 
 
+DOWNLOAD_FOLDER = os.path.join(os.getcwd(), 'download')
 @app.route('/recoverFile/')
 def recoverFile():
     tableName = request.json["selectedTable"]
-    selectedTable = Table(tableName, connection.connector())
-    selectedTable.extractShapefile()
+    selectedTable = Table(tableName, connection.connector)
+    try:
+        selectedTable.extractShapefile(tableName, DOWNLOAD_FOLDER)
+    except ValueError as erro:
+        return erro + "Shapefile vazio"
+    #return redirect(f'/downloadFile/{tableName}')
     return Response(status=201)
 
 
-@app.route('/download/<filename>', methods=['GET', 'POST'])
+@app.route('/downloadFile/<filename>')
 def download(filename):
+    #filename = request.json["selectedTable"]
     downloadedFileName = f'{filename}.zip'
-    send_file(UPLOAD_FOLDER + filename )
-
-
+    downloadedFile = zipfile.ZipFile(f'{DOWNLOAD_FOLDER}/' + downloadedFileName, 'w')
+    extensions = [".shp", ".shx", ".dbf", ".cpg", ".qix", ".prj"]
+    for extension in extensions:
+        try:
+            downloadedFile.write(f'download/{filename}/' + filename + extension, arcname = filename + extension)
+        except:
+            pass
+    
+    downloadedFile.close()
+    return send_from_directory(directory = DOWNLOAD_FOLDER, filename = downloadedFileName)
