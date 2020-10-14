@@ -7,7 +7,7 @@ class Shapefile():
 
     def __init__(self, shapefileAddress):
         self.DataDrame = gpd.read_file(shapefileAddress).fillna(0)
-
+        self = self.converted(self.DataDrame)
     
     def getFields(self):
         return list(self.DataDrame.columns)[:-1]

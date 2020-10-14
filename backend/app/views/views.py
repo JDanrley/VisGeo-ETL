@@ -1,8 +1,9 @@
 #Python modules
 import os
+import zipfile
 
 #Flask modules
-from flask import request, redirect, url_for, render_template, json, Response, jsonify
+from flask import request, redirect, url_for, render_template, json, Response, jsonify, send_file
 from werkzeug.utils import secure_filename
 
 #Custom modules
@@ -58,14 +59,22 @@ def save():
     selectedFields = request.json["message"]
     global globalTableName
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
-    shapefile = shapefile.converted(selectedFields)
     returnedMessage = connection.shpToPostgis(shapefile, connection.getColumnsNames(globalTableName), globalTableName)
+    os.execv(f'{UPLOAD_FOLDER}', f'del {currentFileName}.*')
     return jsonify(message = returnedMessage)
 
 
-@app.route('/recoverFile')
+@app.route('/recoverFile/')
 def recoverFile():
     tableName = request.json["selectedTable"]
     selectedTable = Table(tableName, connection.connector())
     selectedTable.extractShapefile()
     return Response(status=201)
+
+
+@app.route('/download/<filename>', methods=['GET', 'POST'])
+def download(filename):
+    downloadedFileName = f'{filename}.zip'
+    send_file(UPLOAD_FOLDER + filename )
+
+

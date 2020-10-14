@@ -10,7 +10,8 @@ class Table():
     
 
     def extractShapefile(self, enc = "UTF-8"):
-        self.dataFrame.to_file(f'{self.name}', enconding = enc)
+        self.dataFrame.to_file(f'{self.name}',enconding = enc)
+        self.dataFrame.to_file()
         return self.name
 
 
