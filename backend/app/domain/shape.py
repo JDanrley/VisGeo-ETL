@@ -15,4 +15,4 @@ class Shapefile():
 
     def format(self, selectedFields):
         selectedFields.append('geometry')
-        self = self.DataDrame[selectedFields]
+        self.DataDrame = self.DataDrame[selectedFields]

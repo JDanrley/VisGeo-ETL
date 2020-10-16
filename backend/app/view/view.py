@@ -59,8 +59,7 @@ def save():
     global globalTableName
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
     shapefile.format(selectedFields)
-    returnedMessage = connection.shpToPostgis(shapefile, connection.getColumnsNames(globalTableName), globalTableName)
-    os.execv(f'{UPLOAD_FOLDER}', f'del {currentFileName}.*')
+    returnedMessage = connection.shpToPostgis(shapefile.DataDrame, connection.getColumnsNames(globalTableName), globalTableName)
     return jsonify(message = returnedMessage)
 
 
