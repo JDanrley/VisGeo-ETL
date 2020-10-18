@@ -21,7 +21,7 @@ const DownloadTables = ({tables}) => {
         selectedTable: tableName,
       });
 
-      info(table);
+      info(`Baixando table ${tableName}`);
     } catch (error) {
       error('Deu merda');
     }
