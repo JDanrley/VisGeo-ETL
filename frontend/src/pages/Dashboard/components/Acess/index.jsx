@@ -35,14 +35,14 @@ const Acess = ({setFields, setTables, changeScreen}) => {
       const response = await api.get("/getFieldsAndTables");
       setFields(response?.data?.fields);
       setTables(response?.data?.tables);
-      changeScreen(true);
+      changeScreen('upload');
     } catch (error) {
       console.log(error);
     }
     
     /* CODIGO PARA DEBUG */
     
-    if (localStorage.getItem('MODE') === 'debug') changeScreen(true);
+    if (localStorage.getItem('MODE') === 'debug') changeScreen('upload');
     
     /* CODIGO PARA DEBUG */
   }
@@ -69,14 +69,14 @@ const Acess = ({setFields, setTables, changeScreen}) => {
         </div>
 
         <div className="upload-container">
-          <button onClick={()=> setOpenConnection(true)} className="upload-dash search-dash">
+          <button onClick={()=> changeScreen('download')} className="upload-dash search-dash">
             <SearchIcon className="upload-icon" />
 
             <span className="upload-desc search-desc">Pesquise no banco de dados</span>
           </button>
 
           <button 
-            onClick={()=> setOpenConnection(true)} 
+            onClick={()=> changeScreen('download')} 
             className="handle-button"
           >
             Buscar
