@@ -78,8 +78,8 @@ def recoverFile():
         selectedTable.extractShapefile(tableName, DOWNLOAD_FOLDER)
     except ValueError as erro:
         return erro + "Shapefile vazio"
-    return redirect(f'/downloadFile/{tableName}')
-
+    return Response(status=201)
+    
 
 @app.route('/downloadFile/<filename>', methods = ["GET", "POST"])
 def download(filename):
