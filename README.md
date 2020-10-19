@@ -2,9 +2,6 @@
 
 # SPRINT 2
 
-- Para essa sprint foi definido com nosso cliente a seguinte prioridade:
-
-![VisGeo - Card02](https://user-images.githubusercontent.com/57918707/93689902-54f54a80-faa9-11ea-8bb1-c1e6d8602069.png)
 
 ## Novas funcionalidades
 
@@ -26,6 +23,8 @@
 
 - Neste momento o arquivo será baixado e poderá ser utilizado pelo usuário.
 
-## Gráfico de burndown das tarefas completadas para equipe para atender os requisitos da Sprint 2
+![download screen](https://user-images.githubusercontent.com/56441371/96398975-91e55780-11a3-11eb-8a26-ec52167d2a65.png)
+
+## Gráfico de burndown das tarefas completadas pela equipe para atender os requisitos da Sprint 2
 
 ![Burndown](https://user-images.githubusercontent.com/45850297/96396637-09b08380-119e-11eb-8b9b-9db22f1fc077.png)
