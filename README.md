@@ -26,4 +26,6 @@
 
 - Neste momento o arquivo será baixado e poderá ser utilizado pelo usuário.
 
-![Burndown-chart](https://user-images.githubusercontent.com/45850297/95025034-33759080-065d-11eb-9996-76cdf454a6d9.png)
+## Gráfico de burndown das tarefas completadas para equipe para atender os requisitos da Sprint 2
+
+![Burndown](https://user-images.githubusercontent.com/45850297/96396637-09b08380-119e-11eb-8b9b-9db22f1fc077.png)
