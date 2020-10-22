@@ -63,8 +63,14 @@ def save():
     return jsonify(message = returnedMessage)
 
 
+@app.route('/searchTables')
+def searchTables():
+    global connection
+    return jsonify(connection.getTables())
+
+
 DOWNLOAD_FOLDER = os.path.join(os.getcwd(), 'download')
-@app.route('/recoverFile/')
+@app.route('/recoverFile/', methods = ["GET", "POST"])
 def recoverFile():
     tableName = request.json["selectedTable"]
     selectedTable = Table(tableName, connection.connector)
@@ -74,9 +80,9 @@ def recoverFile():
         return erro + " - Shapefile vazio"
     #return redirect(f'/downloadFile/{tableName}')
     return Response(status=201)
+    
 
-
-@app.route('/downloadFile/<filename>')
+@app.route('/downloadFile/<filename>', methods = ["GET", "POST"])
 def download(filename):
     #filename = request.json["selectedTable"]
     downloadedFileName = f'{filename}.zip'
