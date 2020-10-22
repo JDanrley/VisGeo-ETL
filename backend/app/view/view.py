@@ -71,7 +71,7 @@ def recoverFile():
     try:
         selectedTable.extractShapefile(tableName, DOWNLOAD_FOLDER)
     except ValueError as erro:
-        return erro + "Shapefile vazio"
+        return erro + " - Shapefile vazio"
     #return redirect(f'/downloadFile/{tableName}')
     return Response(status=201)
 
