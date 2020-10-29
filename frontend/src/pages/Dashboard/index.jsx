@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
@@ -18,6 +18,12 @@ function Dashboard() {
 
   const [tableFromDatabase, setTableFromDatabase] = useState([])
 
+  useEffect(() => {
+    api.get('/searchTables').then(response => {
+      setTableFromDatabase(response.data);
+    });
+  },[])
+
   const renderScreens = (toScreen) => {
     switch (toScreen) {
       case 'main':
@@ -33,9 +39,6 @@ function Dashboard() {
         );
 
       case 'download':
-        api.get('/recoverFile').then(response => {
-          setTableFromDatabase(response.data);
-        });
 
         return(
           <DownloadTables tables={tableFromDatabase} />

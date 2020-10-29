@@ -19,6 +19,10 @@ export const Container = styled.div`
     color: #43DBB2;
   }
 
+  .ant-spin-dot-item {
+    background-color: #43DBB2;
+  }
+
   section {
     width: 621px;
     height: 446px;

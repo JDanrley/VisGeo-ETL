@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { message } from 'antd';
+import React, { useState } from 'react';
+import { message, Spin } from 'antd';
 
 import api from '../../../../services/api';
 import { Container } from './styles';
 
 const DownloadTables = ({tables}) => {
-  // const data = ['Tabela 1','Tabela 2','Tabela 3','Tabela 4','Tabela 5','Tabela 6','Tabela 7','Tabela 8','Tabela 9','Tabela 10'];
 
   const [tableName, setTableName] = useState('');
   const { info, error } = message;
+
+  const [ loading, setLoading ] = useState(false)
 
   const handleSelectTable = (table) => {
     setTableName(table);
@@ -16,15 +17,22 @@ const DownloadTables = ({tables}) => {
   }
 
   async function handleDownload() {
+    setLoading(true)
     try {
-      api.post('/recoverFile', {
+      const response = await api.post('/recoverFile/', {
         selectedTable: tableName,
-      });
+      }) 
 
+      if (response.status === 201) {
+        window.location.href = `http://localhost:5000/downloadFile/${tableName}`
+      }
+      
       info(`Baixando table ${tableName}`);
-    } catch (error) {
-      error('Deu merda');
+    } catch (err) {
+      error('Algo deu errado');
+      
     }
+    setLoading(false)
   }
 
   return (
@@ -32,7 +40,7 @@ const DownloadTables = ({tables}) => {
       <h1>
         TABELAS DISPONÍVEIS
       </h1>
-
+      {loading && <Spin size="large" />}
       <section>
         <ul>
           {tables.map(table => (
