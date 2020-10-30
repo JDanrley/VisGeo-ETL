@@ -9,7 +9,9 @@ import ModalConnection from '../ModalConnection';
 import { UploadIcon, SearchIcon, Container } from './styles';
 
 const Acess = ({setFields, setTables, changeScreen}) => {  
-  const [openConnection, setOpenConnection] = useState(false);
+  const isConnected = JSON.parse(sessionStorage.getItem('isConnected'))
+  console.log(isConnected)
+  const [openConnection, setOpenConnection] = useState(isConnected);
   const { Dragger } = Upload;
 
   const props = {

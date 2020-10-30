@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Alert } from 'antd';
 
@@ -59,6 +59,7 @@ const ModalConnection = ({open, close}) => {
       
       if(isConnected) {
         close(true);
+        sessionStorage.setItem("isConnected", true);
       } else {
         setError(true);
         setErrorMessage("Credenciais não estão corretas");
