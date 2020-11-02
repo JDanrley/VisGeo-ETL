@@ -114,7 +114,7 @@ export const Container = styled.div`
       
     }
   }
-`
+`;
 
 export const UploadIcon = styled(RiUploadCloud2Line)`
   font-size: 100px;

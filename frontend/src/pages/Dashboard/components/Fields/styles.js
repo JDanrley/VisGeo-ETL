@@ -3,7 +3,7 @@ import { BsArrowRight } from 'react-icons/bs';
 
 export const ArrowRight = styled(BsArrowRight)`
   margin-top: -2px;
-`
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -126,4 +126,4 @@ export const Container = styled.div`
       background-color: #33AC91;
     }
   }
-`
+`;

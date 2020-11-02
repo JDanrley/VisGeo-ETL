@@ -4,10 +4,12 @@ import { Alert } from 'antd';
 
 import api from '../../../../services/api';
 
-import { UserIcon, Lock, PortIcon, DatabaseIcon, 
-    Modal, HostIcon } from './styles';
+import {
+  UserIcon, Lock, PortIcon, DatabaseIcon,
+  Modal, HostIcon,
+} from './styles';
 
-const ModalConnection = ({open, close}) => {
+const ModalConnection = ({ open, close }) => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
@@ -17,63 +19,46 @@ const ModalConnection = ({open, close}) => {
   const [port, setPort] = useState('');
   const [database, setDatabase] = useState('');
 
-  // useEffect(()=>{
-	// 	window.addEventListener('keypress', (event)=>{
-  //     if(event.key === "Enter") {
-  //       handleConnect();
-  //     }
-	// 	})
-
-	// 	return ()=> {
-	// 		window.removeEventListener('keypress', ()=> {
-	// 			return;
-	// 		});
-	// 	}
-	// },[]);
-
   async function handleConnect() {
-    const data = {      
+    const data = {
       username,
       password,
       host,
       port,
-      database
+      database,
     };
-
-    console.log(data)
 
     /* CODIGO PARA DEBUG */
     if (username === 'debug-develop') {
       localStorage.setItem('MODE', 'debug');
       close(true);
       return;
-    } else {
-      localStorage.setItem('MODE', 'production');
     }
+    localStorage.setItem('MODE', 'production');
+
     /* CODIGO PARA DEBUG */
 
-
-    if ( username, password, host, port, database ) {
+    if (username && password && host && port && database) {
       const response = await api.post('/auth', data);
       const { isConnected } = response.data;
-      
-      if(isConnected) {
+
+      if (isConnected) {
         close(true);
-        sessionStorage.setItem("isConnected", true);
+        sessionStorage.setItem('isConnected', true);
       } else {
         setError(true);
-        setErrorMessage("Credenciais não estão corretas");
+        setErrorMessage('Credenciais não estão corretas');
       }
 
       return;
     }
 
     setError(true);
-    setErrorMessage("Campos não podem estar nulos");
+    setErrorMessage('Campos não podem estar nulos');
   }
 
   return (
-    <Modal show={!open} >
+    <Modal show={!open}>
       <Modal.Header>
         <h1>ACESSE O BANCO DE DADOS DESEJADO</h1>
       </Modal.Header>
@@ -85,7 +70,7 @@ const ModalConnection = ({open, close}) => {
           type="error"
           closable
           showIcon
-          onClose={()=> setError(false)}
+          onClose={() => setError(false)}
         />
       )}
 
@@ -101,39 +86,38 @@ const ModalConnection = ({open, close}) => {
             Senha
           </span>
 
-          <input onChange={e => setUsername(e.target.value)} type="text" className="cred-input-info"/>
+          <input onChange={(e) => setUsername(e.target.value)} type="text" className="cred-input-info" />
 
-          <input onChange={e => setPassword(e.target.value)} type="password" className="cred-input-info"/>
+          <input onChange={(e) => setPassword(e.target.value)} type="password" className="cred-input-info" />
         </section>
 
         <section>
           <span className="cred-meta-info">
-            <HostIcon className="white-icon"/>
+            <HostIcon className="white-icon" />
             Host
           </span>
-    
 
           <span className="cred-meta-info">
             <PortIcon className="white-icon" />
             Port
           </span>
 
-
           <span className="cred-meta-info">
             <DatabaseIcon className="white-icon" />
             Database
           </span>
-          
-          <input onChange={e => setHost(e.target.value)} type="text" className="cred-input-info"/>
 
-          <input onChange={e => setPort(e.target.value)} type="text" className="cred-input-info"/>
+          <input onChange={(e) => setHost(e.target.value)} type="text" className="cred-input-info" />
 
-          <input onChange={e => setDatabase(e.target.value)} type="text" className="cred-input-info"/>
+          <input onChange={(e) => setPort(e.target.value)} type="text" className="cred-input-info" />
+
+          <input onChange={(e) => setDatabase(e.target.value)} type="text" className="cred-input-info" />
         </section>
       </div>
 
       <Modal.Footer>
-        <button 
+        <button
+          type="button"
           onClick={handleConnect}
           className="handle-button"
         >
@@ -141,6 +125,6 @@ const ModalConnection = ({open, close}) => {
         </button>
       </Modal.Footer>
     </Modal>
-  )
-}
+  );
+};
 export default ModalConnection;

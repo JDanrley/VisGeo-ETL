@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-
-import api from '../../../../services/api';
+import React, { useState } from 'react';
 
 import { Upload, message } from 'antd';
+import api from '../../../../services/api';
 
 import ModalConnection from '../ModalConnection';
 
 import { UploadIcon, SearchIcon, Container } from './styles';
 
-const Acess = ({setFields, setTables, changeScreen}) => {  
-  const isConnected = JSON.parse(sessionStorage.getItem('isConnected'))
-  console.log(isConnected)
+const Acess = ({ setFields, setTables, changeScreen }) => {
+  const isConnected = JSON.parse(sessionStorage.getItem('isConnected'));
+  console.log(isConnected);
   const [openConnection, setOpenConnection] = useState(isConnected);
   const { Dragger } = Upload;
 
@@ -34,26 +33,26 @@ const Acess = ({setFields, setTables, changeScreen}) => {
 
   async function handleUpload() {
     try {
-      const response = await api.get("/getFieldsAndTables");
+      const response = await api.get('/getFieldsAndTables');
       setFields(response?.data?.fields);
       setTables(response?.data?.tables);
       changeScreen('upload');
     } catch (error) {
       console.log(error);
     }
-    
+
     /* CODIGO PARA DEBUG */
-    
+
     if (localStorage.getItem('MODE') === 'debug') changeScreen('upload');
-    
+
     /* CODIGO PARA DEBUG */
   }
 
   return (
     <Container>
-      <ModalConnection 
-        open={openConnection} 
-        close={setOpenConnection} 
+      <ModalConnection
+        open={openConnection}
+        close={setOpenConnection}
       />
 
       <div className="upload-search-container">
@@ -67,18 +66,19 @@ const Acess = ({setFields, setTables, changeScreen}) => {
             </div>
           </Dragger>
 
-          <button onClick={handleUpload} className="handle-button">Upload</button>
+          <button type="button" onClick={handleUpload} className="handle-button">Upload</button>
         </div>
 
         <div className="upload-container">
-          <button onClick={()=> changeScreen('download')} className="upload-dash search-dash">
+          <button type="button" onClick={() => changeScreen('download')} className="upload-dash search-dash">
             <SearchIcon className="upload-icon" />
 
             <span className="upload-desc search-desc">Pesquise no banco de dados</span>
           </button>
 
-          <button 
-            onClick={()=> changeScreen('download')} 
+          <button
+            type="button"
+            onClick={() => changeScreen('download')}
             className="handle-button"
           >
             Buscar
@@ -86,7 +86,7 @@ const Acess = ({setFields, setTables, changeScreen}) => {
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
 export default Acess;

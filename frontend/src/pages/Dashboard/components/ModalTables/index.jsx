@@ -7,12 +7,14 @@ import RenderColumnsAndFields from './components/RenderColumnsAndFields';
 
 import { Modal, ArrowRight } from './styles';
 
-const ModalTable = ({show, setShow, fields, columns, tableName}) => {
+const ModalTable = ({
+  show, setShow, fields, columns,
+}) => {
   /* CODIGO PARA DEBUG */
   const mode = localStorage.getItem('MODE');
 
-  const columnsDebug = ['Coluna 1','Coluna 2','Coluna 3','Coluna 4','Coluna 5','Coluna 6'];
-  const fieldsDebug = ['Campo 1','Campo 2','Campo 3','Campo 4','Campo 5','Campo 6'];
+  const columnsDebug = ['Coluna 1', 'Coluna 2', 'Coluna 3', 'Coluna 4', 'Coluna 5', 'Coluna 6'];
+  const fieldsDebug = ['Campo 1', 'Campo 2', 'Campo 3', 'Campo 4', 'Campo 5', 'Campo 6'];
 
   /* CODIGO PARA DEBUG */
 
@@ -21,14 +23,13 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
   const [message, setMessage] = useState('');
   const [spin, setSpin] = useState(false);
 
-
   async function handleSend() {
     const data = [];
     setSpin(true);
 
-    columns.forEach(column => {
+    columns.forEach((column) => {
       const field = document.querySelector(`#${column}`);
-      if(field.value !== "Escolha um campo") {
+      if (field.value !== 'Escolha um campo') {
         data.push(field.value);
       }
     });
@@ -36,7 +37,7 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
     try {
       const response = await api.post('/save', { message: data });
       setMessage(response?.data?.message);
-      
+
       setSuccess(true);
     } catch (a) {
       setError(true);
@@ -47,9 +48,13 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
 
   return (
     <>
-      <Modal show={show} onHide={()=> setShow(false)}>
+      <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header>
-          CONFIGURAÇÃO DE <ArrowRight /> PARA
+          CONFIGURAÇÃO DE
+          {' '}
+          <ArrowRight />
+          {' '}
+          PARA
         </Modal.Header>
         <section className="center">
           {spin && <Spin size="large" />}
@@ -57,11 +62,11 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
           {error && (
             <Alert
               message="Erro"
-              description={'Falha ao comunicar com o servidor'}
+              description="Falha ao comunicar com o servidor"
               type="error"
               closable
               showIcon
-              onClose={()=> setError(false)}
+              onClose={() => setError(false)}
             />
           )}
 
@@ -72,22 +77,21 @@ const ModalTable = ({show, setShow, fields, columns, tableName}) => {
               type="success"
               closable
               showIcon
-              onClose={()=> setSuccess(false)}
+              onClose={() => setSuccess(false)}
             />
           )}
 
-          {mode === 'production' 
+          {mode === 'production'
             ? <RenderColumnsAndFields columns={columns} fields={fields} />
-            : <RenderColumnsAndFields columns={columnsDebug} fields={fieldsDebug} />     
-          }
+            : <RenderColumnsAndFields columns={columnsDebug} fields={fieldsDebug} />}
 
         </section>
         <Modal.Footer>
-          <button onClick={handleSend}>Enviar campos</button>
+          <button type="button" onClick={handleSend}>Enviar campos</button>
         </Modal.Footer>
-      </Modal>      
+      </Modal>
     </>
-  )
-}
+  );
+};
 
 export default ModalTable;

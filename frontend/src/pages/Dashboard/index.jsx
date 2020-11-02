@@ -16,44 +16,45 @@ function Dashboard() {
   const [tables, setTables] = useState([]);
   const [screen, setScreen] = useState('main');
 
-  const [tableFromDatabase, setTableFromDatabase] = useState([])
+  const [tableFromDatabase, setTableFromDatabase] = useState([]);
 
   useEffect(() => {
-    api.get('/searchTables').then(response => {
+    api.get('/searchTables').then((response) => {
       setTableFromDatabase(response.data);
     });
-  },[])
+  }, []);
 
+  // eslint-disable-next-line consistent-return
   const renderScreens = (toScreen) => {
     switch (toScreen) {
       case 'main':
-      
-        return(
+
+        return (
           <Acess setFields={setFields} setTables={setTables} changeScreen={setScreen} />
         );
 
       case 'upload':
-        
-        return(
+
+        return (
           <Fields fields={fields} tables={tables} />
         );
 
       case 'download':
 
-        return(
+        return (
           <DownloadTables tables={tableFromDatabase} />
         );
-  
+
       default:
         break;
     }
-  }
+  };
 
   return (
     <>
       <DashboardContainer>
         <header>
-          <img 
+          <img
             src={LogoHeader}
             alt="VisGeo"
             className="logo-header"
@@ -61,11 +62,11 @@ function Dashboard() {
           />
 
         </header>
-        
+
         {
           renderScreens(screen)
         }
-          
+
       </DashboardContainer>
     </>
   );

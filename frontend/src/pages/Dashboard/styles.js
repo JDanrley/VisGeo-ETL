@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import Background from '../../assets/images/background-dashboard.png';
 
-
 export const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;

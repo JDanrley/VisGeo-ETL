@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Modal as ModalBoots } from 'react-bootstrap';
 
 import { FaUserAlt } from 'react-icons/fa';
-import { IoIosLock } from 'react-icons/io';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { IoIosLock, IoIosCloseCircleOutline } from 'react-icons/io';
 import { RiLoginBoxFill } from 'react-icons/ri';
 import { GoDatabase } from 'react-icons/go';
 import { WiCloudyWindy } from 'react-icons/wi';
@@ -22,7 +21,7 @@ export const CloseIcon = styled(IoIosCloseCircleOutline)`
   right: 20px;
   font-size: 30px;
   color: #FFF;
-`
+`;
 
 export const Modal = styled(ModalBoots)`
 
@@ -165,7 +164,7 @@ export const Modal = styled(ModalBoots)`
       background-color: #33AC91;
     }
   }
-`
+`;
 
 export const UserIcon = styled(FaUserAlt)`
   margin-right: 5px;

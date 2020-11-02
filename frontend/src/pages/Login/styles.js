@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-import LoginBG from '../../assets/images/VisGeoBG.png';
-
 import { IoIosLock } from 'react-icons/io';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { BsPersonPlusFill } from 'react-icons/bs';
+import LoginBG from '../../assets/images/VisGeoBG.png';
 
 export const RegisterIcon = styled(BsPersonPlusFill)`
   margin-right: 10px;

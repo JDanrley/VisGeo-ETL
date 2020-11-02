@@ -75,5 +75,4 @@ export const Content = styled.section`
       } 
     }
   }
-  
-`
+`;

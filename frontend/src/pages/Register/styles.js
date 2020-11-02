@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
-import LoginBG from '../../assets/images/VisGeoBG.png';
-
 import { IoIosLock } from 'react-icons/io';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { BsPersonPlusFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
+import LoginBG from '../../assets/images/VisGeoBG.png';
 
 export const UserIcon = styled(FaUserAlt)`
   font-size: 25px;
