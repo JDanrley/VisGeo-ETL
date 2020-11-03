@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { message } from 'antd';
 
 import {
   LoginContainer, Lock, LoginIcon, RegisterIcon,
 } from './styles';
 
+import { api_crud } from '../../services/api';
 import Logo from '../../assets/images/Logo.png';
 
 function Login() {
   const history = useHistory();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  
+  async function handleLogin () {
+    if (!email || !password) {
+      message.error("Verifique os campos por favor");
+      return;
+    }
+
+    try {
+      const responseDb = await api_crud.post('/sessions', {
+        email,
+        password
+      });
+
+      const { token } = responseDb?.data;
+
+      message.success('Login com sucesso!');     
+
+      localStorage.setItem('token', token);
+
+      history.push('/dashboard');
+    } catch (error) {
+      message.error('Algo deu errado!. Contate o suporte');
+    }
+  }
 
   return (
     <>
@@ -20,12 +49,20 @@ function Login() {
           <form>
             <div className="input-container">
               <span className="email-symbol">@</span>
-              <input type="text" placeholder="E-mail" />
+              <input 
+                type="text" 
+                placeholder="E-mail" 
+                onChange={e => setEmail(e?.target?.value)}
+              />
             </div>
 
             <div className="input-container">
               <Lock className="password-icon" />
-              <input type="password" placeholder="Senha" />
+              <input 
+                type="password" 
+                placeholder="Senha" 
+                onChange={e => setPassword(e?.target?.value)}
+              />
             </div>
           </form>
 
@@ -34,7 +71,7 @@ function Login() {
           <button
             type="button"
             className="log-in"
-            onClick={() => history.push('/dashboard')}
+            onClick={handleLogin}
           >
             <LoginIcon />
             ACESSAR
