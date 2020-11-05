@@ -170,7 +170,7 @@ export const LoginContainer = styled.div`
     background-image: url(${LoginBG});
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-x: -750px;
+    background-position-x: -700px;
 
     img {
       width: 240px;
