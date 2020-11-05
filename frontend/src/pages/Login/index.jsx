@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
 
+import './responsive.css'; //css responsive file
+
 import {
   LoginContainer, Lock, LoginIcon, RegisterIcon,
 } from './styles';
@@ -96,7 +98,7 @@ function Login() {
         </div>
 
         <div className="register-container">
-          <img src={Logo} alt="VisGeo" />
+          <img id="logo-home" src={Logo} alt="VisGeo" />
           <span className="welcome">OLÁ, SEJA BEM-VINDO!</span>
 
           <p className="welcome-paragraph">Estavamos ansiosos por sua chegada, comece aqui sua nova jornada conosco.</p>
