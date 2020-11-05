@@ -9,7 +9,7 @@ import {
   Modal, HostIcon,
 } from './styles';
 
-const ModalConnection = ({ open, close }) => {
+const ModalConnection = ({ open, close, searchTables }) => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
@@ -44,6 +44,7 @@ const ModalConnection = ({ open, close }) => {
 
       if (isConnected) {
         close(true);
+        searchTables();
         sessionStorage.setItem('isConnected', true);
       } else {
         setError(true);

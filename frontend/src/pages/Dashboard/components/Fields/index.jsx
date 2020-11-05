@@ -14,6 +14,7 @@ const Fields = ({ fields, tables }) => {
   const tablesDebug = ['Tabela 1', 'Tabela 2', 'Tabela 3', 'Tabela 4', 'Tabela 5', 'Tabela 6'];
 
   const [columns, setColumns] = useState([]);
+  const [selectedTable, setSelectedTable] = useState('');
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -21,6 +22,8 @@ const Fields = ({ fields, tables }) => {
   };
 
   async function handleGetColumns(table) {
+    setSelectedTable(table);
+
     const response = await api.get(`/columns/${table}`);
     setColumns(response.data);
     message.info(`Tabela ${table} selecionada`);
@@ -79,7 +82,7 @@ const Fields = ({ fields, tables }) => {
 
             <Dropdown overlay={menu} trigger={['click']}>
               <a className="ant-dropdown-link" href onClick={(e) => e.preventDefault()}>
-                SELECIONE UMA TABELA
+                {selectedTable || "SELECIONE UMA TABELA"}
                 {' '}
                 <DownOutlined className="down-arrow-menu" />
               </a>

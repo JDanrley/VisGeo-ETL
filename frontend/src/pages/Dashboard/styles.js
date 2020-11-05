@@ -37,5 +37,20 @@ export const DashboardContainer = styled.div`
         margin-left: 10px;
       }
     }
+
+    .exit {
+      background: #43DBB2;
+      border-radius: 50px;
+      border: none;
+      padding: 5px 25px;
+      margin-right: 5vw;
+      font-family: Quicksand;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 28px;
+      line-height: 47px;
+      text-align: center;
+      color: #FFFFFF;
+    }
   }
 `;

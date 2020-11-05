@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
@@ -11,18 +11,25 @@ import DownloadTables from './components/DownloadTables';
 import LogoHeader from '../../assets/images/Logo-white-bg.png';
 
 function Dashboard() {
-  const history = useHistory();
   const [fields, setFields] = useState([]);
   const [tables, setTables] = useState([]);
   const [screen, setScreen] = useState('main');
 
+  const history = useHistory();
+
   const [tableFromDatabase, setTableFromDatabase] = useState([]);
 
-  useEffect(() => {
+  const handleSearchTables = () => {
     api.get('/searchTables').then((response) => {
       setTableFromDatabase(response.data);
     });
-  }, []);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('isConnected');
+    history.push('/');
+  }
 
   // eslint-disable-next-line consistent-return
   const renderScreens = (toScreen) => {
@@ -30,7 +37,12 @@ function Dashboard() {
       case 'main':
 
         return (
-          <Acess setFields={setFields} setTables={setTables} changeScreen={setScreen} />
+          <Acess 
+            setFields={setFields} 
+            setTables={setTables} 
+            changeScreen={setScreen} 
+            searchTables={handleSearchTables}
+          />
         );
 
       case 'upload':
@@ -58,8 +70,15 @@ function Dashboard() {
             src={LogoHeader}
             alt="VisGeo"
             className="logo-header"
-            onClick={() => history.push('/')}
+            onClick={() => setScreen('main')}
           />
+
+          <button 
+            className="exit"
+            onClick={handleLogout}
+          >
+            SAIR
+          </button>
 
         </header>
 

@@ -7,9 +7,9 @@ import ModalConnection from '../ModalConnection';
 
 import { UploadIcon, SearchIcon, Container } from './styles';
 
-const Acess = ({ setFields, setTables, changeScreen }) => {
+const Acess = ({ setFields, setTables, changeScreen, searchTables }) => {
   const isConnected = JSON.parse(sessionStorage.getItem('isConnected'));
-  console.log(isConnected);
+
   const [openConnection, setOpenConnection] = useState(isConnected);
   const { Dragger } = Upload;
 
@@ -53,6 +53,7 @@ const Acess = ({ setFields, setTables, changeScreen }) => {
       <ModalConnection
         open={openConnection}
         close={setOpenConnection}
+        searchTables={searchTables}
       />
 
       <div className="upload-search-container">

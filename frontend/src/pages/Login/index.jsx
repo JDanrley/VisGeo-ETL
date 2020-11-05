@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { message } from 'antd';
 
@@ -6,11 +6,15 @@ import {
   LoginContainer, Lock, LoginIcon, RegisterIcon,
 } from './styles';
 
+import { getToken } from '../../services/auth';
+
 import { api_crud } from '../../services/api';
 import Logo from '../../assets/images/Logo.png';
 
 function Login() {
   const history = useHistory();
+
+  const isUserConnected = getToken();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -38,6 +42,12 @@ function Login() {
       message.error('Algo deu errado!. Contate o suporte');
     }
   }
+
+  useEffect(() => {
+    if(isUserConnected) {
+      history.push('/dashboard');
+    }
+  }, [history, isUserConnected]);
 
   return (
     <>
