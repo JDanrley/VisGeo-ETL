@@ -29,7 +29,7 @@ const ModalConnection = ({ open, close, searchTables }) => {
     };
 
     /* CODIGO PARA DEBUG */
-    if (username === 'debug-develop') {
+    if (username === 'debug') {
       localStorage.setItem('MODE', 'debug');
       close(true);
       return;

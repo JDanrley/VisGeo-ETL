@@ -1,8 +1,39 @@
 import styled from 'styled-components';
+import { Button as ButtonANTD } from 'antd';
 import { BsArrowRight } from 'react-icons/bs';
 
 export const ArrowRight = styled(BsArrowRight)`
   margin-top: -2px;
+`;
+
+export const Button = styled(ButtonANTD)`
+  margin-top: 30px;
+  padding: 0 20px;
+  width: max-content;
+  height: 76px;
+  border: none;
+  background: #43DBB2;
+  border-radius: 50px;
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 37px;
+  text-align: center;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+
+  &:hover {
+    border: 1px solid #43DBB2;
+    background: #FFFFFF;
+    color: #43DBB2;
+  }
+
+  &:focus {
+    border: 1px solid #43DBB2;
+    background: #FFFFFF;
+    color: #43DBB2;
+  }
 `;
 
 export const Container = styled.div`
@@ -11,23 +42,6 @@ export const Container = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-
-  button.saveDirectly {
-    margin-top: 30px;
-    padding: 0 20px;
-    width: max-content;
-    height: 76px;
-    border: none;
-    background: #43DBB2;
-    border-radius: 50px;
-    font-family: Quicksand;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 25px;
-    line-height: 37px;
-    text-align: center;
-    color: #FFFFFF;
-  }
 
   section {
     h1 {

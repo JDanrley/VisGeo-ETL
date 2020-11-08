@@ -5,7 +5,7 @@ import { Menu, Dropdown, message } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import api from '../../../../services/api';
 
-import { Container, ArrowRight } from './styles';
+import { Container, ArrowRight, Button } from './styles';
 
 import ModalTables from '../ModalTables';
 
@@ -14,6 +14,7 @@ const Fields = ({ fields, tables }) => {
   const tablesDebug = ['Tabela 1', 'Tabela 2', 'Tabela 3', 'Tabela 4', 'Tabela 5', 'Tabela 6'];
 
   const [columns, setColumns] = useState([]);
+  const [saveLoading, setSaveLoading] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [openModal, setOpenModal] = useState(false);
 
@@ -22,6 +23,8 @@ const Fields = ({ fields, tables }) => {
   };
 
   async function handleSaveDirectly () {
+    setSaveLoading(true);
+
     try {
       await api.post('/saveDirectly');
       message.success('Salvo com sucesso');
@@ -29,6 +32,7 @@ const Fields = ({ fields, tables }) => {
       message.error('Falha ao salvar arquivo no banco de dados');
     }
     
+    setSaveLoading(false);
   };
 
   async function handleGetColumns(table) {
@@ -110,13 +114,15 @@ const Fields = ({ fields, tables }) => {
         </section>
       </div>
 
-      <button 
+      <Button 
         className="saveDirectly"
         type="button"
+        loading={saveLoading}
         onClick={handleSaveDirectly}
+        title="Criar e salvar o shapefile inteiro em uma nova tabela"
       >
-        Salvar diretamente
-      </button>
+        {saveLoading ? "Enviando arquivos" : "Salvar diretamente"}
+      </Button>
     </Container>
   );
 };
