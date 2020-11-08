@@ -105,4 +105,5 @@ def saveDirectly():
     try:
         connection.saveDirectly(shapefile.DataDrame, currentFileName)
         return Response(status = 201)
-    return Response(status = 500)
+    except:
+        return Response(status = 500)
