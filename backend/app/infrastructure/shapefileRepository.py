@@ -1,5 +1,6 @@
 import postgresql
 import psycopg2
+from sqlalchemy import create_engine
 
 class ShapefileRepository():
 
@@ -14,6 +15,7 @@ class ShapefileRepository():
             #self.connector = postgresql.open(f'pq://{credentials["username"]}:{credentials["password"]}@{credentials["host"]}:{credentials["port"]}/{credentials["database"]}')
             self.connector = psycopg2.connect(f"dbname='{credentials['database']}' user='{credentials['username']}' host='{credentials['host']}' password='{credentials['password']}' port='{credentials['port']}'")
             self.cursor = self.connector.cursor()
+            self.engine = create_engine(f"postgres://{credentials['username']}:{credentials['password']}@{credentials['host']}:{credentials['port']}/{credentials['database']}")
             return True
         except:
             return False
@@ -73,3 +75,8 @@ class ShapefileRepository():
                 self.cursor.execute(self.tupleToQuery(tempList, tableColumnsList, tableName))
             return True
         return False
+
+    
+    def saveDirectly(self, DataFrame, tableName):
+        DataFrame.to_postgis(tableName, con = self.engine)
+        

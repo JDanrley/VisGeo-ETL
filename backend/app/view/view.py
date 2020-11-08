@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 from app import app
 from app.domain.shape import Shapefile
 from app.domain.table import Table
+from app.domain.user import User
 from app.infrastructure.shapefileRepository import ShapefileRepository
 
 #Global variables
@@ -96,3 +97,10 @@ def download(filename):
     
     downloadedFile.close()
     return send_from_directory(directory = DOWNLOAD_FOLDER, filename = downloadedFileName)
+
+
+@app.route('/saveDirectly', methods = ['POST'])
+def saveDirectly():
+    shapefile = Shapefile(f'shapefiles/{currentFileName}')
+    connection.saveDirectly(shapefile.DataDrame, currentFileName)
+    return Response(status = 201)
