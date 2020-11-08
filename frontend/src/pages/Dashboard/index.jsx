@@ -5,7 +5,7 @@ import api from '../../services/api';
 import { DashboardContainer } from './styles';
 
 import Acess from './components/Acess';
-import Fields from './components/Fields';
+import UploadComponent from './components/UploadComponent';
 import DownloadTables from './components/DownloadTables';
 
 import LogoHeader from '../../assets/images/Logo-white-bg.png';
@@ -48,7 +48,7 @@ function Dashboard() {
       case 'upload':
 
         return (
-          <Fields fields={fields} tables={tables} />
+          <UploadComponent fields={fields} tables={tables} />
         );
 
       case 'download':

@@ -21,6 +21,16 @@ const Fields = ({ fields, tables }) => {
     setOpenModal(true);
   };
 
+  async function handleSaveDirectly () {
+    try {
+      await api.post('/saveDirectly');
+      message.success('Salvo com sucesso');
+    } catch (error) {
+      message.error('Falha ao salvar arquivo no banco de dados');
+    }
+    
+  };
+
   async function handleGetColumns(table) {
     setSelectedTable(table);
 
@@ -99,6 +109,14 @@ const Fields = ({ fields, tables }) => {
           </div>
         </section>
       </div>
+
+      <button 
+        className="saveDirectly"
+        type="button"
+        onClick={handleSaveDirectly}
+      >
+        Salvar diretamente
+      </button>
     </Container>
   );
 };

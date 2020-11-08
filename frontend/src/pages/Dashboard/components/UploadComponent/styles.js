@@ -7,6 +7,27 @@ export const ArrowRight = styled(BsArrowRight)`
 
 export const Container = styled.div`
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  button.saveDirectly {
+    margin-top: 30px;
+    padding: 0 20px;
+    width: max-content;
+    height: 76px;
+    border: none;
+    background: #43DBB2;
+    border-radius: 50px;
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 37px;
+    text-align: center;
+    color: #FFFFFF;
+  }
 
   section {
     h1 {
