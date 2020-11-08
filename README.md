@@ -47,7 +47,6 @@ O Projeto consiste no desenvolvimento de um sistema web ETL¹ no qual dados geor
 
 ### Requisitos Não Funcionais:
 
-- Linguagem Java;
 - Banco de Dados Geográficos PostGIS;
 - Documentações.
 
@@ -67,17 +66,14 @@ O Projeto consiste no desenvolvimento de um sistema web ETL¹ no qual dados geor
 
 ### Entregas
 
-[Sprint 1](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-1) 14/09/2020 a 20/09/2020
+[Sprint 1 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-1) 14/09/2020 a 20/09/2020
 
-[Sprint 2](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-2) 28/09/2020 a 04/10/2020
+[Sprint 2 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-2) 12/10/2020 a 18/10/2020
 
-[Sprint 3](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-3) 12/10/2020 a 18/10/2020
+[Sprint 3 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-3) 02/11/2020 a 08/11/2020
 
-[Sprint 4](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-4) 26/10/2020 a 01/11/2020
+[Sprint 4 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-4) 23/11/2020 a 29/11/2020
 
-[Sprint 5](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-5) 09/11/2020 a 15/11/2020
-
-[Sprint 6](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-6) 23/11/2020 a 29/11/2020
 
 ### Requisitos necessários para o funcionamento do software
 
@@ -163,6 +159,11 @@ $ yarn start
 $ python3 run.py
 ```
 
+- Cadastro e login:
+```
+$ yarn dev
+```
+
 **Instalação em ambientes Windows**
 
 - Basta instalar o **Python3**, pois o **pip3** já virá instalado por padrão juntamente com o **Python**.
@@ -226,6 +227,11 @@ $ yarn start
 
 ```
 $ python3 run.py
+```
+
+- Cadastro e login:
+```
+$ yarn dev
 ```
 
 ### Definições
