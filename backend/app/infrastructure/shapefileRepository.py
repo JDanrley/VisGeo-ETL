@@ -78,5 +78,7 @@ class ShapefileRepository():
 
     
     def saveDirectly(self, DataFrame, tableName):
-        DataFrame.to_postgis(tableName, con = self.engine)
+        # self.cursor.execute(f'CREATE TABLE {tableName}')
+        # self.connector.commit()
+        DataFrame.to_postgis(tableName[:-4], self.engine, schema='public')
         

@@ -102,8 +102,6 @@ def download(filename):
 @app.route('/saveDirectly', methods = ['POST'])
 def saveDirectly():
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
-    try:
-        connection.saveDirectly(shapefile.DataDrame, currentFileName)
-        return Response(status = 201)
-    except:
-        return Response(status = 500)
+
+    connection.saveDirectly(shapefile.DataDrame, currentFileName)
+    return Response(status = 201)
