@@ -52,7 +52,7 @@ O Projeto consiste no desenvolvimento de um sistema web ETL¹ no qual dados geor
 
 ### Backlog do Projeto
 
-![VisGeo - Sprints](https://user-images.githubusercontent.com/56441371/93688814-1fe3fa80-fa9f-11ea-9183-93dbc3749f5a.png)
+![Cards](https://user-images.githubusercontent.com/56441371/98672721-ff188280-2334-11eb-9050-4b434acba3a4.png)
 
 ### Tecnologias Utilizadas
 
