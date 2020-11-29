@@ -14,17 +14,24 @@ from app.domain.user import User
 from app.infrastructure.shapefileRepository import ShapefileRepository
 
 #Global variables
-connection = ShapefileRepository()
 currentFileName = None
 globalTableName = None
+connections = dict()
 
+# @app.route('/auth', methods=['GET', 'POST'])
+# def auth():
+#     global connection
+#     global credentials
+#     credentials = dict(request.json)
+#     if connection.credentialsAreValid(credentials):
+#         return json.dumps({"isConnected": True})
+#     return json.dumps({"isConnected": False})
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
-    global connection
-    global credentials
     credentials = dict(request.json)
-    if connection.credentialsAreValid(credentials):
+    connections[request.json['token']] = ShapefileRepository()
+    if connections[request.json['token']].credentialsAreValid(credentials):
         return json.dumps({"isConnected": True})
     return json.dumps({"isConnected": False})
 
@@ -35,46 +42,43 @@ def upload():
     file = request.files['shapefiles']
     savePath = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
     file.save(savePath)
-    global currentFileName
-    currentFileName = file.filename
     return Response(status=201)
     
 
-@app.route('/getFieldsAndTables/', methods=['GET'])
+@app.route('/getFieldsAndTables', methods=['GET'])
 def fields():
-    shapefile = Shapefile(f'shapefiles/{currentFileName}')
+    fileName = request.json['filename']
+    shapefile = Shapefile(f'shapefiles/{fileName}')
     return jsonify(fields = shapefile.getFields(),
-                   tables = connection.getTables())
+                   tables = connections[request.json['token']].getTables())
 
 
 @app.route('/columns/<tableName>', methods=['GET'])
 def columns(tableName):
-    global globalTableName
-    globalTableName = tableName
-    return json.dumps(connection.getColumnsNames(tableName))
+    return json.dumps(connections[request.json['token']].getColumnsNames(tableName))
 
 
 @app.route('/save', methods=['POST'])
 def save():
     selectedFields = request.json["message"]
-    global globalTableName
-    shapefile = Shapefile(f'shapefiles/{currentFileName}')
+    fileName = request.json['filename']
+    tableName = request.json['tableName']
+    shapefile = Shapefile(f'shapefiles/{fileName}')
     shapefile.format(selectedFields)
-    returnedMessage = connection.shpToPostgis(shapefile.DataDrame, connection.getColumnsNames(globalTableName), globalTableName)
+    returnedMessage = connections[request.json['token']].shpToPostgis(shapefile.DataDrame, connections[request.json['token']].getColumnsNames(tableName), tableName)
     return jsonify(message = returnedMessage)
 
 
 @app.route('/searchTables')
 def searchTables():
-    global connection
-    return jsonify(connection.getTables())
+    return jsonify(connections[request.json['token']].getTables())
 
 
 DOWNLOAD_FOLDER = os.path.join(os.getcwd(), 'download')
 @app.route('/recoverFile/', methods = ["GET", "POST"])
 def recoverFile():
     tableName = request.json["selectedTable"]
-    selectedTable = Table(tableName, connection.connector)
+    selectedTable = Table(tableName, connections[request.json['token']].connector)
     try:
         selectedTable.extractShapefile(tableName, DOWNLOAD_FOLDER)
     except ValueError as erro:
@@ -101,7 +105,7 @@ def download(filename):
 
 @app.route('/saveDirectly', methods = ['POST'])
 def saveDirectly():
+    filename = request.json["filename"]
     shapefile = Shapefile(f'shapefiles/{currentFileName}')
-
-    connection.saveDirectly(shapefile.DataDrame, currentFileName)
+    connections[request.json['token']].saveDirectly(shapefile.DataDrame, filename)
     return Response(status = 201)
