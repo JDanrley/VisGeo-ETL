@@ -54,13 +54,21 @@ Conseguimos também facilmente, baixar todos os shapefiles salvos no banco de da
 
 ![sprint2](https://user-images.githubusercontent.com/56457600/100559745-7e450a80-3292-11eb-816b-b1cfe497f6ea.gif)
 
-#### - Gerenciamento das tarefas na sprint
+## Gerenciamento das tarefas na sprint
+
+![image](https://user-images.githubusercontent.com/45850297/100568066-db4bbb00-32a8-11eb-9454-15fd692d0eb5.png)
+
+As tarefas acima foram divididas da seguinte forma:
+
+- Tarefa 1: adequar as rotas de download para receber o token de cada usuário autenticado;
+- Tarefa 2: corrigir o bug de exibição do modal, para que o usuário não tenha que se autenticar a cada refresh da página;
+- Tarefa 3: adequar as rotas de expansão de objetos geográficos para cada instância de conexão com o banco;
+- Tarefa 4: refatorar as rotas para evitar redundâncias;
+- Tarefa 5: adequar chamadas no frontend para incluir token nas operações de download;
+- Tarefa 6: adequar chamadas no frontend para incluir token nas operações de upload.
+
+### Gráfico de burndown referente ao andamento da sprint
 
 ![image](https://user-images.githubusercontent.com/45850297/100567320-f5849980-32a6-11eb-8727-4eae9599f275.png)
-
-
-
-
-
 
 
