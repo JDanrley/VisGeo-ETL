@@ -26,6 +26,7 @@ const ModalConnection = ({ open, close, searchTables }) => {
       host,
       port,
       database,
+      token: localStorage.getItem('token')
     };
 
     /* CODIGO PARA DEBUG */

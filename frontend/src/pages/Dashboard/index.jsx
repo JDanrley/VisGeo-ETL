@@ -20,7 +20,7 @@ function Dashboard() {
   const [tableFromDatabase, setTableFromDatabase] = useState([]);
 
   const handleSearchTables = () => {
-    api.get('/searchTables').then((response) => {
+    api.post('/searchTables', {token: localStorage.getItem('token')}).then((response) => {
       setTableFromDatabase(response.data);
     });
   };

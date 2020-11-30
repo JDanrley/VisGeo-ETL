@@ -45,15 +45,15 @@ def upload():
     return Response(status=201)
     
 
-@app.route('/getFieldsAndTables', methods=['GET'])
+@app.route('/getFieldsAndTables', methods=['POST'])
 def fields():
     fileName = request.json['filename']
-    shapefile = Shapefile(f'shapefiles/{fileName}')
+    shapefile = Shapefile(f'shapefiles/{fileName}.shp')
     return jsonify(fields = shapefile.getFields(),
                    tables = connections[request.json['token']].getTables())
 
 
-@app.route('/columns/<tableName>', methods=['GET'])
+@app.route('/columns/<tableName>', methods=['POST'])
 def columns(tableName):
     return json.dumps(connections[request.json['token']].getColumnsNames(tableName))
 
@@ -63,13 +63,13 @@ def save():
     selectedFields = request.json["message"]
     fileName = request.json['filename']
     tableName = request.json['tableName']
-    shapefile = Shapefile(f'shapefiles/{fileName}')
+    shapefile = Shapefile(f'shapefiles/{fileName}.shp')
     shapefile.format(selectedFields)
     returnedMessage = connections[request.json['token']].shpToPostgis(shapefile.DataDrame, connections[request.json['token']].getColumnsNames(tableName), tableName)
     return jsonify(message = returnedMessage)
 
 
-@app.route('/searchTables')
+@app.route('/searchTables', methods=['POST'])
 def searchTables():
     return jsonify(connections[request.json['token']].getTables())
 
@@ -106,6 +106,6 @@ def download(filename):
 @app.route('/saveDirectly', methods = ['POST'])
 def saveDirectly():
     filename = request.json["filename"]
-    shapefile = Shapefile(f'shapefiles/{currentFileName}')
+    shapefile = Shapefile(f'shapefiles/{filename}.shp')
     connections[request.json['token']].saveDirectly(shapefile.DataDrame, filename)
     return Response(status = 201)

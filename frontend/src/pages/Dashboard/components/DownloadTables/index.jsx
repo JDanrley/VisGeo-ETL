@@ -20,6 +20,7 @@ const DownloadTables = ({ tables }) => {
     try {
       const response = await api.post('/recoverFile/', {
         selectedTable: tableName,
+        token: localStorage.getItem('token')
       });
 
       if (response.status === 201) {

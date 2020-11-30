@@ -10,7 +10,9 @@ import { UploadIcon, SearchIcon, Container } from './styles';
 const Acess = ({ setFields, setTables, changeScreen, searchTables }) => {
   const isConnected = JSON.parse(sessionStorage.getItem('isConnected'));
 
+  const [fileName, setFileName] = useState('');
   const [openConnection, setOpenConnection] = useState(isConnected);
+  
   const { Dragger } = Upload;
 
   const props = {
@@ -23,8 +25,16 @@ const Acess = ({ setFields, setTables, changeScreen, searchTables }) => {
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);
       }
+
+      localStorage.removeItem('filename');
+
+
       if (status === 'done') {
+
+        localStorage.setItem('filename', info.file.name?.split('.')[0]);
+        setFileName(info.file.name?.split('.')[0]);
         message.success(`${info.file.name} file uploaded successfully.`);
+        
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }
@@ -33,7 +43,11 @@ const Acess = ({ setFields, setTables, changeScreen, searchTables }) => {
 
   async function handleUpload() {
     try {
-      const response = await api.get('/getFieldsAndTables');
+      const response = await api.post('/getFieldsAndTables', {
+        filename: fileName,
+        token: localStorage.getItem('token'),
+      });
+
       setFields(response?.data?.fields);
       setTables(response?.data?.tables);
       changeScreen('upload');
