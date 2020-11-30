@@ -24,9 +24,13 @@ const Fields = ({ fields, tables }) => {
 
   async function handleSaveDirectly () {
     setSaveLoading(true);
+    const filename = localStorage.getItem('filename');
 
     try {
-      await api.post('/saveDirectly');
+      await api.post('/saveDirectly', {
+        filename,
+        token: localStorage.getItem('token')
+      });
       message.success('Salvo com sucesso');
     } catch (error) {
       message.error('Falha ao salvar arquivo no banco de dados');
@@ -38,7 +42,7 @@ const Fields = ({ fields, tables }) => {
   async function handleGetColumns(table) {
     setSelectedTable(table);
 
-    const response = await api.get(`/columns/${table}`);
+    const response = await api.post(`/columns/${table}`, {token: localStorage.getItem('token')});
     setColumns(response.data);
     message.info(`Tabela ${table} selecionada`);
   }
@@ -68,6 +72,7 @@ const Fields = ({ fields, tables }) => {
   return (
     <Container>
       <ModalTables
+        selectedTable={selectedTable}
         fields={fields}
         show={openModal}
         columns={columns}

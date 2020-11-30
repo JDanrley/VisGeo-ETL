@@ -8,10 +8,15 @@ import RenderColumnsAndFields from './components/RenderColumnsAndFields';
 import { Modal, ArrowRight } from './styles';
 
 const ModalTable = ({
-  show, setShow, fields, columns,
+  show, 
+  setShow, 
+  fields, 
+  columns,
+  selectedTable,
 }) => {
   /* CODIGO PARA DEBUG */
   const mode = localStorage.getItem('MODE');
+  const filename = localStorage.getItem('filename');
 
   const columnsDebug = ['Coluna 1', 'Coluna 2', 'Coluna 3', 'Coluna 4', 'Coluna 5', 'Coluna 6'];
   const fieldsDebug = ['Campo 1', 'Campo 2', 'Campo 3', 'Campo 4', 'Campo 5', 'Campo 6'];
@@ -35,7 +40,12 @@ const ModalTable = ({
     });
 
     try {
-      const response = await api.post('/save', { message: data });
+      const response = await api.post('/save', { 
+        message: data, 
+        filename: filename,
+        tableName: selectedTable,
+        token: localStorage.getItem('token')
+      });
       setMessage(response?.data?.message);
 
       setSuccess(true);
