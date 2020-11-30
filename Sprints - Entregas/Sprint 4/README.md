@@ -56,7 +56,7 @@ Conseguimos também facilmente, baixar todos os shapefiles salvos no banco de da
 
 #### - Gerenciamento das tarefas na sprint
 
-![burndown](https://user-images.githubusercontent.com/45850297/100567193-af2f3a80-32a6-11eb-9c47-7bd24c9d9edc.png)
+![image](https://user-images.githubusercontent.com/45850297/100567320-f5849980-32a6-11eb-8727-4eae9599f275.png)
 
 
 
