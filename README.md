@@ -66,13 +66,13 @@ O Projeto consiste no desenvolvimento de um sistema web ETL¹ no qual dados geor
 
 ### Entregas
 
-[Sprint 1 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-1) 14/09/2020 a 20/09/2020
+[Sprint 1 - ](https://github.com/JDanrley/VisGeo-ETL/tree/master/Sprints%20-%20Entregas/Sprint%201) 14/09/2020 a 20/09/2020
 
-[Sprint 2 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-2) 12/10/2020 a 18/10/2020
+[Sprint 2 - ](https://github.com/JDanrley/VisGeo-ETL/tree/master/Sprints%20-%20Entregas/Sprint%202) 12/10/2020 a 18/10/2020
 
-[Sprint 3 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-3) 02/11/2020 a 08/11/2020
+[Sprint 3 - ](https://github.com/JDanrley/VisGeo-ETL/tree/master/Sprints%20-%20Entregas/Sprint%203) 02/11/2020 a 08/11/2020
 
-[Sprint 4 - ](https://github.com/JDanrley/VisGeo-ETL/tree/Sprint-4) 23/11/2020 a 29/11/2020
+[Sprint 4 - ](https://github.com/JDanrley/VisGeo-ETL/tree/master/Sprints%20-%20Entregas/Sprint%204) 23/11/2020 a 29/11/2020
 
 
 ### Requisitos necessários para o funcionamento do software
