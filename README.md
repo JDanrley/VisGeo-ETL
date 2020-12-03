@@ -22,15 +22,15 @@ A **VisGEO** nasceu através da necessidade de resolução de um problema do cli
 
 ### Time
 
-- Evandro Braga - PO
-- José Danrley - Scrum Master
-- Cristiane Rodrigues - DEV Team
-- Leonardo Messias  - DEV Team
-- Luis Guilherme - DEV Team
-- Matheus Amauri - DEV Team
-- Pedro Mendonça - DEV Team
-- Raquel Ribeiro - DEV Team
-- Washington Henrique - DEV Team
+- Evandro Braga - PO - [LinkedIn](https://www.linkedin.com/in/evandro-rodrigues-de-melo-braga-1aa677149/)
+- José Danrley - Scrum Master - [LinkedIn](https://www.linkedin.com/in/jos%C3%A9-danrley-069827191/)
+- Cristiane Rodrigues - DEV Team - [LinkedIn](https://www.linkedin.com/in/cristiane-rodrigues-20b3b61b2)
+- Leonardo Messias  - DEV Team - [LinkedIn](https://www.linkedin.com/in/leonardo-messias-89568818a/)
+- Luis Guilherme - DEV Team - [LinkedIn](https://www.linkedin.com/mwlite/in/luis-guilherme-a17b58185)
+- Matheus Amauri - DEV Team - [LinkedIn](https://www.linkedin.com/in/matheus-campos-9b8550192)
+- Pedro Mendonça - DEV Team - [LinkedIn](https://www.linkedin.com/in/pedro-mendon%C3%A7a-3a13541a4/)
+- Raquel Ribeiro - DEV Team - [LinkedIn](https://www.linkedin.com/in/raquel-rodrigues-ribeiro-a9537818b)
+- Washington Henrique - DEV Team - [LinkedIn](www.linkedin.com/in/justhenrique/)
 
 ### Objetivo
 
