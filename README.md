@@ -30,7 +30,7 @@ A **VisGEO** nasceu através da necessidade de resolução de um problema do cli
 - Matheus Amauri - DEV Team - [LinkedIn](https://www.linkedin.com/in/matheus-campos-9b8550192)
 - Pedro Mendonça - DEV Team - [LinkedIn](https://www.linkedin.com/in/pedro-mendon%C3%A7a-3a13541a4/)
 - Raquel Ribeiro - DEV Team - [LinkedIn](https://www.linkedin.com/in/raquel-rodrigues-ribeiro-a9537818b)
-- Washington Henrique - DEV Team - [LinkedIn](www.linkedin.com/in/justhenrique/)
+- Washington Henrique - DEV Team - [LinkedIn](https://www.linkedin.com/in/justhenrique/)
 
 ### Objetivo
 
